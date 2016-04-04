@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="spring-boot-sample-tomcat-jsp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="spring-boot-sample-tomcat-jsp-1.3.2.RELEASE.war">
+      <element id="artifact" artifact-name="spring-boot-sample-tomcat-jsp:war exploded" />
+    </root>
+  </artifact>
+</component>
