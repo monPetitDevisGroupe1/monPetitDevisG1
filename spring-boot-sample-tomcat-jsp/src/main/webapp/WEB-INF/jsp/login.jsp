@@ -12,7 +12,7 @@
 	<body>
 		<H1>Welcome to the Spring Security Form Tutorial!</H1>
 
-		<form id="form" action="<c:url value='/connexion.do'/>" method="POST">
+		<form id="form" action="<c:url value='/connexion'/>" method="POST">
 			<c:if test="${not empty param.err}">
 				<div class="msg-container error">
 					<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
