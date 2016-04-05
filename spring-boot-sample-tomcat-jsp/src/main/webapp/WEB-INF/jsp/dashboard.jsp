@@ -13,7 +13,8 @@
 <body>
 <h1>Mon petit devis</h1>
 <h2>Dashboard</h2>
+<div id = "zoneDevis">
 <h3>Devis en cours : </h3>
-
+</div>
 </body>
 </html>
