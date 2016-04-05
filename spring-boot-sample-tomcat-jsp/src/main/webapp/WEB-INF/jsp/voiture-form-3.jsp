@@ -7,45 +7,39 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" import="javax.servlet.jsp.PageContext" %>
 
 <html>
 <head>
     <title> Devis Voiture</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="<c:url value='/static/favicon.ico'/>" rel="shortcut icon">
 </head>
-
 <body>
 
-    <form action="savev1" methode="GET">
-        <h1>Etape : 1</h1>
-        <label> Nom : </label>
-        <label> Prénom : </label><br/>
+    <form action="/voiture3">
+        <h1>Etape : 3</h1>
 
-        <label> Nom du devis : </label><br/>
         <div>
             <div>
-                Marque :
-                <input type="text" name="marque">
+                Conducteur principal :
+                <input type="text" name="conduc-princ">
             </div>
             <div>
-                Model :
-                <input type="text" name="modele">
+                Conducteur secondaire :
+                <input type="text" name="conduc-sec">
             </div>
             <div>
-                Carburant :
-                <input type="text" name="carburant">
+                Dors dans un garage :
+                <input type="checkbox" name="dors-garagge">
             </div>
             <div>
-                Chevaux fiscaux :
-                <input type="text" name="chevaux">
+                Adresse :
+                <input type="text" name="adresse-garage">
             </div>
         </div>
         <input type="submit" value="Submit" />
     </form>
-
-
-
+    <a href="/voiture2">Previous</a>
 </body>
 </html>

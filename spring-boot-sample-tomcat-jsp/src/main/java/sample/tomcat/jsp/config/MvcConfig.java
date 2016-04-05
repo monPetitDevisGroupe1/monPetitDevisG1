@@ -20,6 +20,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/403").setViewName("403");
+        registry.addViewController("/voiture").setViewName("voiture-form-1");
+        registry.addViewController("/voiture2").setViewName("voiture-form-2");
+        registry.addViewController("/voiture3").setViewName("voiture-form-3");
+        registry.addViewController("/savev1").setViewName("save-v1");
     }
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {

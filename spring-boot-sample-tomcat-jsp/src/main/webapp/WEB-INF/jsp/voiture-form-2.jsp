@@ -13,39 +13,27 @@
 <head>
     <title> Devis Voiture</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="<c:url value='/static/favicon.ico'/>" rel="shortcut icon">
 </head>
-
 <body>
 
-    <form action="savev1" methode="GET">
-        <h1>Etape : 1</h1>
-        <label> Nom : </label>
-        <label> Prénom : </label><br/>
-
-        <label> Nom du devis : </label><br/>
+    <form action="/voiture3">
+        <h1>Etape : 2</h1>
         <div>
             <div>
-                Marque :
-                <input type="text" name="marque">
+                Date du permis :
+                <input type="date" name="permis">
             </div>
             <div>
-                Model :
-                <input type="text" name="modele">
+                Nombre d’accident :
+                <input type="number" name="nbr-accident">
             </div>
             <div>
-                Carburant :
-                <input type="text" name="carburant">
-            </div>
-            <div>
-                Chevaux fiscaux :
-                <input type="text" name="chevaux">
+                Bonus malus :
+                <input type="number" name="bonus-malus">
             </div>
         </div>
         <input type="submit" value="Submit" />
     </form>
-
-
-
+    <a href="/voiture">Previous</a>
 </body>
 </html>
