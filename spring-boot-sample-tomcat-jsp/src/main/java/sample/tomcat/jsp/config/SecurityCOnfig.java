@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.client.RestTemplate;
 import sample.tomcat.jsp.service.CustomUserDetailService;
 
 import javax.sql.DataSource;
@@ -53,13 +54,13 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> http");
 
         //http.csrf().disable();
-        http.authorizeRequests().antMatchers("/","index", "/fail", "fail2").permitAll()
+        http.authorizeRequests().antMatchers("/","index", "/fail", "fail2", "/error").permitAll()
                 //.antMatchers("/private/admin/**").hasRole("ADMIN")
                 .antMatchers("/private/**").fullyAuthenticated()
                 .and()
                     .formLogin()
                     .loginPage( "/login" )
-                    .loginProcessingUrl( "/login.do" )
+                    .loginProcessingUrl( "/login" )
                     .defaultSuccessUrl( "/" )
                     .failureUrl( "/login?err=1" )
                     .usernameParameter( "username" )
@@ -98,7 +99,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
     }
     */
 
-    //@Autowired
+    @Autowired
     private CustomAuthProvider customAuthProvider;
     //private CustomUserDetailService userDetailService;
 

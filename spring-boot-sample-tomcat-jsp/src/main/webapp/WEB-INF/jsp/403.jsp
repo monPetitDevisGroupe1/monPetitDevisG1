@@ -10,6 +10,6 @@
 	</head>
 	<body>
 		<H1>Oops! You are not authorized!</H1>
-		<p><a href="<c:url value='/connexion'/>">Back to Login</a></p>
+		<p><a href="<c:url value='/login'/>">Back to Login</a></p>
 	</body>
 </html>
