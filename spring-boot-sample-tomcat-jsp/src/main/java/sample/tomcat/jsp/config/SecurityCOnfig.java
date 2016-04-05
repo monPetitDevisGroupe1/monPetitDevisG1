@@ -1,5 +1,6 @@
 package sample.tomcat.jsp.config;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,6 +12,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import sample.tomcat.jsp.service.CustomUserDetailService;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+
 /**
  * Created by S0089075 on 11/02/2016.
  */
@@ -21,7 +31,22 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
 
     public static String USER_NAME = "toto";
     public static String USER_NAME_ADMIN = "admin";
-    public static String PASSWORD = new BCryptPasswordEncoder().encode("toto");
+    public static String USER_NAME_YEAH = "yeah";
+    public static String PASSWORD = new BCryptPasswordEncoder().encode("SAUCISSON");
+
+    //public static String PASSWORD = "SAUCISSON";
+
+    @Autowired
+    DataSource dataSource;
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+       auth.jdbcAuthentication().dataSource(dataSource)
+               .usersByUsernameQuery(
+                      "select pseudo as username, mdp as password, 1 as enabled from user where pseudo=?")
+               .authoritiesByUsernameQuery(
+                        "select pseudo as username, 'ROLE_USER' as role from user where pseudo=?");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -73,17 +98,18 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
     }
     */
 
-    @Autowired
-    private CustomUserDetailService userDetailService;
+    //@Autowired
+    private CustomAuthProvider customAuthProvider;
+    //private CustomUserDetailService userDetailService;
 
     @Autowired
     public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception
     {
         System.out.println("configure -> auth");
 
-        //auth.authenticationProvider(this.customAuthProvider);
+        auth.authenticationProvider(this.customAuthProvider);
 
-        auth.userDetailsService(userDetailService).passwordEncoder(new BCryptPasswordEncoder());
+        //auth.userDetailsService(userDetailService).passwordEncoder(new BCryptPasswordEncoder());
 
     }
 

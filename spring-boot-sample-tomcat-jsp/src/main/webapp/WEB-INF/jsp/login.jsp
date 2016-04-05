@@ -13,7 +13,6 @@
 		<H1>Welcome to the Spring Security Form Tutorial!</H1>
 
 		<form id="form" action="<c:url value='/login.do'/>" method="POST">
-
 			<c:if test="${not empty param.err}">
 				<div class="msg-container error">
 					<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
@@ -38,7 +37,7 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 			<div class="submit-container">
-				<input value="Login" name="submit" type="submit" class="submit-btn"/>
+				<input value="connexion" name="submit" type="submit" class="submit-btn"/>
 			</div>
 		</form>
 	</body>

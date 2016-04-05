@@ -21,12 +21,22 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-web:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-web:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-auth-jwt:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-mongo-client:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-async:3.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:bson:3.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:3.0.4" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-mysql-postgresql-client:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-sql-common:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.11.4" level="project" />
+    <orderEntry type="library" name="Maven: com.github.mauricio:postgresql-async_2.11:0.2.18" level="project" />
+    <orderEntry type="library" name="Maven: com.github.mauricio:db-async-common_2.11:0.2.18" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.joda:joda-convert:1.5" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-all:4.0.29.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.github.mauricio:mysql-async_2.11:0.2.18" level="project" />
     <orderEntry type="library" name="Maven: com.englishtown.vertx:vertx-hk2:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.hk2:hk2-api:2.4.0-b31" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
@@ -36,5 +46,12 @@
     <orderEntry type="library" name="Maven: org.glassfish.hk2.external:javax.inject:2.4.0-b31" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.0.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.2.2.RELEASE" level="project" />
   </component>
 </module>
