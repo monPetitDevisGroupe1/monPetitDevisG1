@@ -32,7 +32,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
     public static String USER_NAME_ADMIN = "admin";
     public static String USER_NAME_YEAH = "yeah";
     public static String PASSWORD = new BCryptPasswordEncoder().encode("SAUCISSON");
-
+    //public static String PASSWORD = "SAUCISSON";
 
     @Autowired
     DataSource dataSource;
@@ -56,10 +56,10 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/private/**").fullyAuthenticated()
                 .and()
                     .formLogin()
-                    .loginPage( "/login" )
-                    .loginProcessingUrl( "/login.do" )
+                    .loginPage( "/connexion" )
+                    .loginProcessingUrl( "/connexion.do" )
                     .defaultSuccessUrl( "/" )
-                    .failureUrl( "/login?err=1" )
+                    .failureUrl( "/connexion?err=1" )
                     .usernameParameter( "username" )
                     .passwordParameter( "password" )
                 .and()
@@ -71,7 +71,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
                 // is successful, and the delete-cookies and invalidate-session make sure that we clean up after logout
                 .logout()
                 .logoutRequestMatcher( new AntPathRequestMatcher( "/logout" ) )
-                .logoutSuccessUrl( "/login?out=1" )
+                .logoutSuccessUrl( "/connexion?out=1" )
                 .deleteCookies( "JSESSIONID" )
                 .invalidateHttpSession( true )
                 .and()
