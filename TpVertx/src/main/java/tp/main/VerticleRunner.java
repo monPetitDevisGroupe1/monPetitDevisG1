@@ -74,9 +74,9 @@ public class VerticleRunner {
         Route route = router.route(HttpMethod.POST, "/login");
         route.handler(routingContext -> {
             System.out.println("handle2 -> " + routingContext.request().path());
-            String username = routingContext.request().getParam("username");
-            String mdp = routingContext.request().getParam("password");
-            //mdp = new BCryptPasswordEncoder().encode(mdp);
+            String username = routingContext.getBodyAsJson().getString("username");
+            String mdp = routingContext.getBodyAsJson().getString("password");
+            String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
@@ -113,7 +113,7 @@ public class VerticleRunner {
                                     String password = row.getString(2);
                                     String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
                                     System.out.println("mdp est :"+password);
-                                    if (mdp.equals(password)) {
+                                    if (password.equals(mdpCrypt)) {
                                         reponseVertx.put("statut", "OK");
                                         reponseVertx.put("id", id);
                                         reponseVertx.put("token", token);
@@ -144,6 +144,52 @@ public class VerticleRunner {
             });
 
 
+        });
+
+        Route route2 = router.route(HttpMethod.POST, "/signIn");
+        route2.handler(routingContext2 -> {
+            String username = routingContext2.getBodyAsJson().getString("username");;
+            String mdp = routingContext2.getBodyAsJson().getString("username");;
+            String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+            JsonObject mySQLClientConfig = new JsonObject();
+            mySQLClientConfig.put("host", "localhost");
+            mySQLClientConfig.put("port", 3306);
+            //  mySQLClientConfig.put("maxPoolSize", 10);
+            mySQLClientConfig.put("username", "MPD");
+            mySQLClientConfig.put("password", "kebab");
+            mySQLClientConfig.put("database", "mon-petit-vertx");
+
+            AsyncSQLClient mySQLClient2 = MySQLClient.createShared(vertxVariable, mySQLClientConfig);
+            System.out.println("connexion sql creation " + mySQLClient2);
+            mySQLClient2.getConnection(sql -> {
+                System.out.println(sql.cause());
+                System.out.println("connexion sql :" + sql.succeeded() );
+                JsonObject reponseVertx2 = new JsonObject();
+                if (sql.succeeded()) {
+                    System.out.println("connexion reussi username :"+username+" le mdp crypté est :"+mdpCrypt);
+                    SQLConnection connection = sql.result();
+                    try {
+                        connection.query("INSERT INTO user (pseudo, mdp) VALUES ('"+username+"','"+mdpCrypt+"')", res2 -> {
+                            System.out.println("requete  :" + res2.result());
+                            if (res2.succeeded()) {
+                                reponseVertx2.put("statut", "OK");
+                            } else {
+                                reponseVertx2.put("statut", "ERROR");
+                                reponseVertx2.put("raison", "INSERT");
+                                routingContext2.response().end(reponseVertx2.encode());
+                            }
+                        });
+                    } catch ( Exception e ) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("echec " + sql.result());
+                    reponseVertx2.put("statut", "ERROR");
+                    reponseVertx2.put("raison", "RESEAU");
+                    routingContext2.response().end(reponseVertx2.encode());
+                }
+                routingContext2.response().putHeader("content-type", "type/text");
+            });
         });
         vertxVariable.createHttpServer().requestHandler(router::accept).listen(8081);
     }

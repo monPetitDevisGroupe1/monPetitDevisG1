@@ -41,3 +41,17 @@ $('.tab a').on('click', function (e) {
     $(target).fadeIn(600);
 
 });
+
+function clickers() {
+    $.post(
+        'http://localhost:8081/signIn',
+        {
+            username : "Dylan",
+            password : "password"
+        },
+        function(data){
+           alert(data);
+        },
+        "text"
+    );
+}

@@ -188,6 +188,7 @@
 		}
 	</style>
 	<body>
+	<div style="width:300px;background-color: darkred;" onclick="clickers();">Bouton requete enregistrement</div>
 		<H1>Welcome to the Spring Security Form Tutorial!</H1>
 		<div class="form">
 
@@ -296,7 +297,7 @@
 
 		</div> <!-- /form -->
 
-		<script   src="https://code.jquery.com/jquery-1.12.2.js"   integrity="sha256-VUCyr0ZXB5VhBibo2DkTVhdspjmxUgxDGaLQx7qb7xY="   crossorigin="anonymous">
+		<script   src="resources/js/jquery-1.7.2.min.js" >
 		</script>
 		<script src="resources/js/mainJs.js" type="text/javascript">
 		</script>
