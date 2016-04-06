@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Pierre
-  Date: 05/04/2016
-  Time: 12:22
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="javax.servlet.jsp.PageContext" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Dashboard</title>
@@ -13,7 +8,11 @@
 <body>
 <h1>Mon petit devis</h1>
 <h2>Dashboard</h2>
-<h3>Devis en cours : </h3>
 
+<c:if test="${true}">
+    <h3>Devis en cours : </h3>
+    Nom : ${nom} <br />
+    Type : ${type_devis} <br />
+</c:if>
 </body>
 </html>

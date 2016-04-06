@@ -42,11 +42,11 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-       auth.jdbcAuthentication().dataSource(dataSource)
-               .usersByUsernameQuery(
-                      "select pseudo as username, mdp as password, 1 as enabled from user where pseudo=?")
-               .authoritiesByUsernameQuery(
-                        "select pseudo as username, 'ROLE_USER' as role from user where pseudo=?");
+    //   auth.jdbcAuthentication().dataSource(dataSource)
+    //           .usersByUsernameQuery(
+    //                  "select pseudo as username, mdp as password, 1 as enabled from user where pseudo=?")
+    //           .authoritiesByUsernameQuery(
+    //                    "select pseudo as username, 'ROLE_USER' as role from user where pseudo=?");
     }
 
     @Override
