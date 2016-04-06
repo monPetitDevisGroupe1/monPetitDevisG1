@@ -74,9 +74,16 @@ public class VerticleRunner {
         Route route = router.route(HttpMethod.POST, "/login");
         route.handler(routingContext -> {
             System.out.println("handle2 -> " + routingContext.request().path());
+<<<<<<< HEAD
             String username = routingContext.getBodyAsJson().getString("username");
             String mdp = routingContext.getBodyAsJson().getString("password");
             String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+=======
+            //String username = routingContext.request().get("username");
+            String username = routingContext.getBodyAsJson().getString("username");
+            String mdp = routingContext.getBodyAsJson().getString("password");
+            //mdp = new BCryptPasswordEncoder().encode(mdp);
+>>>>>>> 2709954369be784f5dfe48170d10764fa8f1e454
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
