@@ -179,7 +179,15 @@ public class VerticleRunner {
                         connection.query("INSERT INTO user (pseudo, mdp) VALUES ('"+username+"','"+mdpCrypt+"')", res2 -> {
                             System.out.println("requete  :" + res2.result());
                             if (res2.succeeded()) {
+                                JWTAuth jwt = JWTAuth.create(vertxVariable, new JsonObject()
+                                        .put("keyStore", new JsonObject()
+                                                .put("type", "jceks")
+                                                .put("path", "keystore.jceks")
+                                                .put("password", "secret")));
+                                String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
                                 reponseVertx2.put("statut", "OK");
+                                reponseVertx2.put("token", token);
+
                             } else {
                                 reponseVertx2.put("statut", "ERROR");
                                 reponseVertx2.put("raison", "INSERT");
