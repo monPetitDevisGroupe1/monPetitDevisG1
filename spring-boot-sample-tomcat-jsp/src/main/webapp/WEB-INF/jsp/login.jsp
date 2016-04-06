@@ -188,12 +188,8 @@
 		}
 	</style>
 	<body>
-<<<<<<< HEAD
-	<div style="width:300px;background-color: darkred;" onclick="clickers();">Bouton requete enregistrement</div>
-		<H1>Welcome to the Spring Security Form Tutorial!</H1>
-=======
 		<H1>Bienvenue sur Mon Petit Devis!</H1>
->>>>>>> 2709954369be784f5dfe48170d10764fa8f1e454
+
 		<div class="form">
 
 			<ul class="tab-group">

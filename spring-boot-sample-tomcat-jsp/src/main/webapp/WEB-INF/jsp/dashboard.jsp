@@ -7,7 +7,7 @@
 </head>
 <body>
 <div style = "float: right;">
-    ID_USER : ${}
+    ID_USER : ${sessionScope.id_user}
     <a href="/private/profil">Gestion du profil </a> | <a href="/logout">D&eacute;connexion</a>
 </div>
 <h1>Mon petit devis</h1>
