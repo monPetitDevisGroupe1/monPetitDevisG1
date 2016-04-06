@@ -1,9 +1,10 @@
 package tp.main;
 
-import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
+
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
@@ -18,6 +19,7 @@ import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.auth.jwt.JWTOptions;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.BodyHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.File;
@@ -39,69 +41,111 @@ public class VerticleRunner {
     public static void main(String[] args) {
         Vertx vertxVariable = Vertx.vertx();
         Router router = Router.router(vertxVariable);
-        Route route = router.route(HttpMethod.POST, "/connexion/:username/:mdp/");
 
+        router.route().handler(BodyHandler.create());
+        router.route().handler(context -> {
 
+            context.response().headers().add(HttpHeaders.CONTENT_TYPE, "application/json");
+            context.response().headers().add("content-type", "text/html;charset=UTF-8");
 
+            context.response()
+                    // do not allow proxies to cache the data
+                    .putHeader("Cache-Control", "no-store, no-cache")
+                    // prevents Internet Explorer from MIME - sniffing a
+                    // response away from the declared content-type
+                    .putHeader("X-Content-Type-Options", "nosniff")
+                    // Strict HTTPS (for about ~6Months)
+                    .putHeader("Strict-Transport-Security", "max-age=" + 15768000)
+                    // IE8+ do not allow opening of attachments in the context
+                    // of this resource
+                    .putHeader("X-Download-Options", "noopen")
+                    // enable XSS for IE
+                    .putHeader("X-XSS-Protection", "1; mode=block")
+                    // deny frames
+                    .putHeader("X-FRAME-OPTIONS", "DENY")
+                    // Accept all
+                    .putHeader("Access-Control-Allow-Origin", "*");
 
+            System.out.println("handle -> " + context.request().path());
+
+            context.next();
+        });
+
+        Route route = router.route(HttpMethod.POST, "/login");
         route.handler(routingContext -> {
-            String username = routingContext.request().getParam("pseudo");
-            String mdp = routingContext.request().getParam("mdp");
+            System.out.println("handle2 -> " + routingContext.request().path());
+            String username = routingContext.request().getParam("username");
+            String mdp = routingContext.request().getParam("password");
             //mdp = new BCryptPasswordEncoder().encode(mdp);
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
-            mySQLClientConfig.put("maxPoolSize", 10);
-            mySQLClientConfig.put("username", "root");
-            mySQLClientConfig.put("password", "");
-            mySQLClientConfig.put("database", "mon-petit-devis");
+          //  mySQLClientConfig.put("maxPoolSize", 10);
+            mySQLClientConfig.put("username", "MPD");
+            mySQLClientConfig.put("password", "kebab");
+            mySQLClientConfig.put("database", "mon-petit-vertx");
 
             AsyncSQLClient mySQLClient = MySQLClient.createShared(vertxVariable, mySQLClientConfig);
+            System.out.println("connexion sql creation " + mySQLClient);
             mySQLClient.getConnection(res -> {
+                System.out.println(res.cause());
+                System.out.println("connexion sql" + res.succeeded() );
                 JsonObject reponseVertx = new JsonObject();
                 if (res.succeeded()) {
+                    System.out.println("connexion reussi username :"+username);
                     SQLConnection connection = res.result();
-                    connection.query("SELECT * from mon-petit-vertx WHERE pseudo='"+username+"'", res2 -> {
-                        if (res2.succeeded()) {
-                            ResultSet resultSet = res2.result();
-                            List<JsonArray> results = resultSet.getResults();
-                            try {
-                                genereKeystore();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            JWTAuth jwt = JWTAuth.create(vertxVariable, new JsonObject()
-                                    .put("keyStore", new JsonObject()
-                                            .put("type", "jceks")
-                                            .put("path", "keystore.jceks")
-                                            .put("password", "secret")));
+                    System.out.println("connection - avant requete  :"+res.result());
+                    try {
+                        System.out.println("SELECT * from user WHERE pseudo='" + username + "'");
+                        connection.query("SELECT * from user WHERE pseudo='" + username + "'", res2 -> {
+                            System.out.println("requete  :" + res2.result().getNumRows());
+                            if (res2.result().getNumRows() > 0) {
+                                ResultSet resultSet = res2.result();
+                                List<JsonArray> results = resultSet.getResults();
+                                JWTAuth jwt = JWTAuth.create(vertxVariable, new JsonObject()
+                                        .put("keyStore", new JsonObject()
+                                                .put("type", "jceks")
+                                                .put("path", "keystore.jceks")
+                                                .put("password", "secret")));
 
-                            for (JsonArray row : results) {
-                                String id = row.getString(0);
-                                String password = row.getString(2);
+                                for (JsonArray row : results) {
+                                    int id = row.getInteger(0);
+                                    String password = row.getString(2);
+                                    String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
+                                    System.out.println("mdp est :"+password);
+                                    if (mdp.equals(password)) {
+                                        reponseVertx.put("statut", "OK");
+                                        reponseVertx.put("id", id);
+                                        reponseVertx.put("token", token);
+                                        routingContext.response().end(reponseVertx.encode());
+                                    } else {
+                                        reponseVertx.put("statut", "ERROR");
+                                        reponseVertx.put("raison", "mdp");
+                                        routingContext.response().end(reponseVertx.encode());
+                                    }
 
-                                if (mdp.equals(password)) {
-                                    reponseVertx.put("statut", "OK");
-                                    reponseVertx.put("id", id);
-                                    reponseVertx.put("token", jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L)));
-                                } else {
-                                    reponseVertx.put("statut", "ERROR|mdp");
                                 }
-
+                            } else {
+                                reponseVertx.put("statut", "ERROR");
+                                reponseVertx.put("raison", "username");
+                                routingContext.response().end(reponseVertx.encode());
                             }
-                        } else {
-                            reponseVertx.put("statut", "ERROR|username");
-                        }});
+                        });
+                    } catch ( Exception e ) {
+                        e.printStackTrace();
+                    }
                 } else {
-                    reponseVertx.put("statut", "ERROR|reseau");
+                    System.out.println("echec " + res.result());
+                    reponseVertx.put("statut", "ERROR");
+                    reponseVertx.put("raison", "RESEAU");
+                    routingContext.response().end(reponseVertx.encode());
                 }
                 routingContext.response().putHeader("content-type", "type/text");
-                routingContext.response().end(reponseVertx.encodePrettily());
             });
 
 
         });
-        vertxVariable.createHttpServer().requestHandler(router::accept).listen(8080);
+        vertxVariable.createHttpServer().requestHandler(router::accept).listen(8081);
     }
     public static void genereKeystore() throws Exception {
         File file = new File("keystore.jceks");
