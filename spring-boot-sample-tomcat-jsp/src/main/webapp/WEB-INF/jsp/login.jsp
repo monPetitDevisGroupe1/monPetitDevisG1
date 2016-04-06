@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Spring Security Tutorial - Form</title>
+		<title>Mon Petit Devis : Login</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<!--<link href="<c:url value='/jsp/static/favicon.ico'/>" rel="shortcut icon"> -->
 	</head>
@@ -188,17 +188,17 @@
 		}
 	</style>
 	<body>
-		<H1>Welcome to the Spring Security Form Tutorial!</H1>
+		<H1>Bienvenue sur Mon Petit Devis!</H1>
 		<div class="form">
 
 			<ul class="tab-group">
-				<li class="tab active"><a href="#signup">Sign Up</a></li>
-				<li class="tab"><a href="#login">Log In</a></li>
+				<li class="tab active"><a href="#signup">Inscription</a></li>
+				<li class="tab"><a href="#login">Connexion</a></li>
 			</ul>
 
 			<div class="tab-content">
 				<div id="signup">
-					<h1>Sign Up for Free</h1>
+					<h1>Inscription gratuite</h1>
 
 					<form action="<c:url value='/login'/>" method="POST">
 						<c:if test="${not empty param.err}">
@@ -208,25 +208,25 @@
 						</c:if>
 						<c:if test="${not empty param.out}">
 							<div class="msg-container logout">
-								You've logged out successfully.
+								Vous avez bien &eacute;t&eacute; d&eacute;connect&eacute;.
 							</div>
 						</c:if>
 						<c:if test="${not empty param.time}">
 							<div class="msg-container time">
-								You've been logged out due to inactivity.
+								Vous avez &eacute;t&eacute; d&eacute;connect&eacute; suite &agrave; une trop longue p&eacute;riode d'inactivit&eacute;.
 							</div>
 						</c:if>
 						<div class="top-row">
 							<div class="field-wrap">
 								<label>
-									First Name<span class="req">*</span>
+									Pr&eacute;nom<span class="req">*</span>
 								</label>
 								<input type="text" required autocomplete="off" />
 							</div>
 
 							<div class="field-wrap">
 								<label>
-									Last Name<span class="req">*</span>
+									Nom<span class="req">*</span>
 								</label>
 								<input type="text"required autocomplete="off"/>
 							</div>
@@ -234,28 +234,28 @@
 
 						<div class="field-wrap">
 							<label>
-								Email Address<span class="req">*</span>
+								Adresse mail<span class="req">*</span>
 							</label>
 							<input type="email"required autocomplete="off"/>
 						</div>
 
 						<div class="field-wrap">
 							<label>
-								Set A Password<span class="req">*</span>
+								Mot de passe<span class="req">*</span>
 							</label>
 							<input type="password"required autocomplete="off"/>
 						</div>
 
-						<button type="submit" class="button button-block"/>Get Started</button>
+						<button type="submit" class="button button-block"/>C'est parti !</button>
 
 					</form>
 
 				</div>
 
 				<div id="login">
-					<h1>Welcome Back!</h1>
+					<h1>Bienvenue!</h1>
 
-					<form action="<c:url value='/login'/>" method="POST">
+					<form action="<c:url value='/login.do'/>" method="POST">
 						<c:if test="${not empty param.err}">
 							<div class="msg-container error">
 								<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
@@ -263,30 +263,30 @@
 						</c:if>
 						<c:if test="${not empty param.out}">
 							<div class="msg-container logout">
-								You've logged out successfully.
+								Vous avez bien &eacute;t&eacute; d&eacute;connect&eacute;.
 							</div>
 						</c:if>
 						<c:if test="${not empty param.time}">
 							<div class="msg-container time">
-								You've been logged out due to inactivity.
+								Vous avez &eacute;t&eacute; d&eacute;connect&eacute; suite &agrave; une trop longue p&eacute;riode d'inactivit&eacute; (c'est malin).
 							</div>
 						</c:if>
 						<div class="field-wrap">
 							<label>
-								Email Address<span class="req">*</span>
+								Pseudo<span class="req">*</span>
 							</label>
 							<input type="text" name="username" value="" class="input-text input-email<c:if test="${not empty param.err}"> input-error</c:if>"/><br><br>
 						</div>
 						<div class="field-wrap">
 							<label>
-								Password<span class="req">*</span>
+								Mot de passe<span class="req">*</span>
 							</label>
 							<input type="password" name="password" value="" class="input-text input-pass<c:if test="${not empty param.err}"> input-error</c:if>"/>
 						</div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<p class="forgot"><a href="#">Forgot Password?</a></p>
+						<p class="forgot"><a href="#">Mot de passe oubli&eacute;?</a></p>
 
-						<button class="button button-block"/>Log In</button>
+						<button class="button button-block"/>Connexion</button>
 
 					</>
 

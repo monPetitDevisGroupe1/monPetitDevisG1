@@ -22,7 +22,7 @@ public class ProfilController {
     DataSource dataSource;
     HttpServletRequest request;
 
-    @RequestMapping({"/profil"})
+    @RequestMapping({"/private/profil"})
     public String affichageProfil(Map<String, Object> model) {
         Statement statement = null;
         ResultSet resultat;
@@ -52,7 +52,7 @@ public class ProfilController {
         return "profil";
     }
 
-    @RequestMapping({"/profil.update"})
+    @RequestMapping({"/private/profil.update"})
     public String sauvegardeProfil(Map<String, Object> model) {
 
         String nom = request.getParameter("nom");

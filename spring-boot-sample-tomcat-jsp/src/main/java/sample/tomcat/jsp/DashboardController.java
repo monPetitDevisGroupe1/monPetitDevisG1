@@ -19,7 +19,7 @@ public class DashboardController {
     DataSource dataSource;
 
 
-    @RequestMapping({"/dashboard"})
+    @RequestMapping({"/private/dashboard", "/private"})
     public String dashboard(Map<String, Object> model) {
         Statement statement = null;
         ResultSet resultat0,  resultatEtapes;

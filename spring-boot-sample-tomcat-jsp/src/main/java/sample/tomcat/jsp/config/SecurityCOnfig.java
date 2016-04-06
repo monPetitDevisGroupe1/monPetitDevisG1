@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.client.RestTemplate;
@@ -54,14 +55,14 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> http");
 
         //http.csrf().disable();
-        http.authorizeRequests().antMatchers("/","index", "/fail", "fail2","/css/*").permitAll()
+        http.authorizeRequests().antMatchers("/index", "/login", "/fail", "fail2","/css/*").permitAll()
                 //.antMatchers("/private/admin/**").hasRole("ADMIN")
                 .antMatchers("/private/**").fullyAuthenticated()
                 .and()
                     .formLogin()
                     .loginPage( "/login" )
-                    .loginProcessingUrl( "/login" )
-                    .defaultSuccessUrl( "/" )
+                    .loginProcessingUrl( "/login.do" )
+                    .defaultSuccessUrl( "/private/dashboard" )
                     .failureUrl( "/login?err=1" )
                     .usernameParameter( "username" )
                     .passwordParameter( "password" )
@@ -111,7 +112,6 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(this.customAuthProvider);
 
         //auth.userDetailsService(userDetailService).passwordEncoder(new BCryptPasswordEncoder());
-
     }
 
 }

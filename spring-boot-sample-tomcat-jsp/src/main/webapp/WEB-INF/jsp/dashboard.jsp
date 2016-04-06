@@ -7,7 +7,8 @@
 </head>
 <body>
 <div style = "float: right;">
-    <a href="/profil">Gestion du profil</a> | <a href="/logout">D&eacute;connexion</a>
+    ID_USER : ${}
+    <a href="/private/profil">Gestion du profil </a> | <a href="/logout">D&eacute;connexion</a>
 </div>
 <h1>Mon petit devis</h1>
 <h2>Dashboard</h2>
