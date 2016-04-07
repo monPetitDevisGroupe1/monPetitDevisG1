@@ -53,10 +53,14 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> http");
 
         //http.csrf().disable();
+<<<<<<< HEAD
 
         //http.authorizeRequests().anyRequest().permitAll();
         http.authorizeRequests().antMatchers("/index", "/login", "/fail", "fail2","/css/*").permitAll()
 
+=======
+        http.authorizeRequests().antMatchers("/index", "/login", "/fail", "fail2","/css/*").permitAll()
+>>>>>>> 93f29bf408fa1043cee26754dc7c10719ce7b9c6
                 //.antMatchers("/private/admin/**").hasRole("ADMIN")
                 .antMatchers("/private/**").fullyAuthenticated()
                 .and()

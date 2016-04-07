@@ -21,6 +21,7 @@ import io.vertx.ext.auth.jwt.JWTOptions;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,8 +76,10 @@ public class VerticleRunner {
         route.handler(routingContext -> {
             System.out.println("handle2 -> " + routingContext.request().path());
             String username = routingContext.getBodyAsJson().getString("username");
-            String mdp = routingContext.getBodyAsJson().getString("password");
-            String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+
+            //String mdp = routingContext.getBodyAsJson().getString("password");
+            String mdpcible = routingContext.getBodyAsJson().getString("password");
+            System.out.println("MDP Cible : " + mdpcible);
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
@@ -94,7 +97,7 @@ public class VerticleRunner {
                 if (res.succeeded()) {
                     System.out.println("connexion reussi username :"+username);
                     SQLConnection connection = res.result();
-                    System.out.println("connection - avant requete  :"+res.result());
+                    System.out.println("connexion - avant requete  :"+res.result());
                     try {
                         System.out.println("SELECT * from user WHERE pseudo='" + username + "'");
                         connection.query("SELECT * from user WHERE pseudo='" + username + "'", res2 -> {
@@ -113,7 +116,12 @@ public class VerticleRunner {
                                     String password = row.getString(2);
                                     String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
                                     System.out.println("mdp est :"+password);
-                                    if (password.equals(mdpCrypt)) {
+                                    //PasswordEncoder bcEncoder = new BCryptPasswordEncoder();
+                                    //String toto = bcEncoder.encode("1234");
+
+                                    //Boolean b = bcEncoder.matches(mdpcible, password);
+                                    //System.out.println(b);
+                                    if (password.equals(mdpcible)) {
                                         reponseVertx.put("statut", "OK");
                                         reponseVertx.put("id", id);
                                         reponseVertx.put("token", token);
@@ -150,7 +158,7 @@ public class VerticleRunner {
         route2.handler(routingContext2 -> {
             String username = routingContext2.getBodyAsJson().getString("username");;
             String mdp = routingContext2.getBodyAsJson().getString("username");;
-            String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+           // String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
@@ -169,7 +177,8 @@ public class VerticleRunner {
                     System.out.println("connexion reussi username :"+username+" le mdp crypté est :"+mdpCrypt);
                     SQLConnection connection = sql.result();
                     try {
-                        connection.query("INSERT INTO user (pseudo, mdp) VALUES ('"+username+"','"+mdpCrypt+"')", res2 -> {
+                        connection.queryWithParams("INSERT INTO user (pseudo, mdp) VALUES (?,?)",
+                                new JsonArray().add(username).add(mdp), res2 -> {
                             System.out.println("requete  :" + res2.result());
                             if (res2.succeeded()) {
                                 JWTAuth jwt = JWTAuth.create(vertxVariable, new JsonObject()
@@ -180,6 +189,7 @@ public class VerticleRunner {
                                 String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
                                 reponseVertx2.put("statut", "OK");
                                 reponseVertx2.put("token", token);
+                                routingContext2.response().end(reponseVertx2.encode());
 
                             } else {
                                 reponseVertx2.put("statut", "ERROR");

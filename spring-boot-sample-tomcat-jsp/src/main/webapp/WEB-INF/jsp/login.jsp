@@ -201,7 +201,8 @@
 				<div id="signup">
 					<h1>Inscription gratuite</h1>
 
-					<form action="<c:url value='/login'/>" method="POST">
+
+					<form action="<c:url value='/inscription'/>" method="GET">
 						<c:if test="${not empty param.err}">
 							<div class="msg-container error">
 								<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
@@ -217,34 +218,21 @@
 								Vous avez &eacute;t&eacute; d&eacute;connect&eacute; suite &agrave; une trop longue p&eacute;riode d'inactivit&eacute;.
 							</div>
 						</c:if>
-						<div class="top-row">
-							<div class="field-wrap">
-								<label>
-									Pr&eacute;nom<span class="req">*</span>
-								</label>
-								<input type="text" required autocomplete="off" />
-							</div>
+
 
 							<div class="field-wrap">
 								<label>
-									Nom<span class="req">*</span>
+									Pseudo <span class="req">*</span>
 								</label>
-								<input type="text"required autocomplete="off"/>
+								<input type="text"required autocomplete="off" name = "username"/><br/><br/>
 							</div>
-						</div>
+
 
 						<div class="field-wrap">
 							<label>
-								Adresse mail<span class="req">*</span>
+								Mot de passe <span class="req">*</span>
 							</label>
-							<input type="email"required autocomplete="off"/>
-						</div>
-
-						<div class="field-wrap">
-							<label>
-								Mot de passe<span class="req">*</span>
-							</label>
-							<input type="password"required autocomplete="off"/>
+							<input type="text"required autocomplete="off" name = "password"/>
 						</div>
 
 						<button type="submit" class="button button-block"/>C'est parti !</button>
