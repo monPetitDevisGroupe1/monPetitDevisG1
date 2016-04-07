@@ -77,6 +77,8 @@ public class VerticleRunner {
             String username = routingContext.getBodyAsJson().getString("username");
             String mdp = routingContext.getBodyAsJson().getString("password");
             String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+            System.out.println("MDP clair : " + mdp);
+            System.out.println("MDP crypté : " + mdpCrypt);
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);

@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.client.RestTemplate;
-import sample.tomcat.jsp.service.CustomUserDetailService;
 
 import javax.sql.DataSource;
 
@@ -38,8 +37,6 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
 
     //public static String PASSWORD = "SAUCISSON";
 
-    @Autowired
-    DataSource dataSource;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -55,7 +52,10 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> http");
 
         //http.csrf().disable();
-        http.authorizeRequests().antMatchers("/index", "/inscription", "/login", "/fail", "fail2","/css/*").permitAll()
+
+       //http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers("/","index", "/fail", "fail2", "/error").permitAll()
+
                 //.antMatchers("/private/admin/**").hasRole("ADMIN")
                 .antMatchers("/private/**").fullyAuthenticated()
                 .and()
@@ -85,6 +85,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .invalidSessionUrl( "/login?time=1" )
                 .maximumSessions( 1 );
+
     }
 
 
@@ -102,7 +103,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomAuthProvider customAuthProvider;
-    //private CustomUserDetailService userDetailService;
+
 
     @Autowired
     public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception
