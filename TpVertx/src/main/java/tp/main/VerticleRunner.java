@@ -75,8 +75,7 @@ public class VerticleRunner {
         route.handler(routingContext -> {
             System.out.println("handle2 -> " + routingContext.request().path());
             String username = routingContext.getBodyAsJson().getString("username");
-            String mdp = routingContext.getBodyAsJson().getString("password");
-            String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+            String mdpcible = routingContext.getBodyAsJson().getString("password");
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
@@ -94,7 +93,7 @@ public class VerticleRunner {
                 if (res.succeeded()) {
                     System.out.println("connexion reussi username :"+username);
                     SQLConnection connection = res.result();
-                    System.out.println("connection - avant requete  :"+res.result());
+                    System.out.println("connexion - avant requete  :"+res.result());
                     try {
                         System.out.println("SELECT * from user WHERE pseudo='" + username + "'");
                         connection.query("SELECT * from user WHERE pseudo='" + username + "'", res2 -> {
@@ -113,7 +112,7 @@ public class VerticleRunner {
                                     String password = row.getString(2);
                                     String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
                                     System.out.println("mdp est :"+password);
-                                    if (password.equals(mdpCrypt)) {
+                                    if (new BCryptPasswordEncoder().matches(mdpcible, password)) {
                                         reponseVertx.put("statut", "OK");
                                         reponseVertx.put("id", id);
                                         reponseVertx.put("token", token);

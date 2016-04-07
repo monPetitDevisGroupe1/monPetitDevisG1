@@ -201,7 +201,7 @@
 				<div id="signup">
 					<h1>Inscription gratuite</h1>
 
-					<form action="<c:url value='/login'/>" method="POST">
+					<form action="<c:url value='/signIn'/>" method="POST">
 						<c:if test="${not empty param.err}">
 							<div class="msg-container error">
 								<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
