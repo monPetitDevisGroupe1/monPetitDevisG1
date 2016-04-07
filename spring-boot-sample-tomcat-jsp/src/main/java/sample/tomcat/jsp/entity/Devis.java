@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 public class Devis {
-    private int idDevis;
+    private Integer idDevis;
     private String nom;
     private String typeDevis;
     private int etape;
@@ -27,11 +27,11 @@ public class Devis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_devis", nullable = false)
-    public int getIdDevis() {
+    public Integer getIdDevis() {
         return idDevis;
     }
 
-    public void setIdDevis(int idDevis) {
+    public void setIdDevis(Integer idDevis) {
         this.idDevis = idDevis;
     }
 
