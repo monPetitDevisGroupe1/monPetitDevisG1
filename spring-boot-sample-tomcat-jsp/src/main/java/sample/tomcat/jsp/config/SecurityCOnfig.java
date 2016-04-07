@@ -3,6 +3,7 @@ package sample.tomcat.jsp.config;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -52,12 +53,10 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> http");
 
         //http.csrf().disable();
-<<<<<<< HEAD
-        http.authorizeRequests().anyRequest().permitAll();
-        /*http.authorizeRequests().antMatchers("/","index", "/fail", "fail2", "/error").permitAll()
-=======
+
+        //http.authorizeRequests().anyRequest().permitAll();
         http.authorizeRequests().antMatchers("/index", "/login", "/fail", "fail2","/css/*").permitAll()
->>>>>>> 8390b9c818712b9a521123b574f5212e3fbb5617
+
                 //.antMatchers("/private/admin/**").hasRole("ADMIN")
                 .antMatchers("/private/**").fullyAuthenticated()
                 .and()
@@ -87,11 +86,11 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .invalidSessionUrl( "/login?time=1" )
                 .maximumSessions( 1 );
-                */
+
     }
 
 
-/*
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         System.out.println("configure -> auth");
@@ -101,7 +100,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService()).passwordEncoder(new ShaPasswordEncoder());
 
     }
-    */
+
 
     @Autowired
     private CustomAuthProvider customAuthProvider;
