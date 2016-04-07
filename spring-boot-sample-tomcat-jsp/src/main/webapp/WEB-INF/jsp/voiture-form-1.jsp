@@ -13,17 +13,18 @@
 <head>
     <title> Devis Voiture</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="<c:url value='/static/favicon.ico'/>" rel="shortcut icon">
 </head>
 
 <body>
 
-    <form action="savev1" methode="GET">
+    <form action="/voiture-1" methode="POST">
+        <input type="hidden" name="id_popo" value="<%=request.getParameter("id_devis") %>" >
         <h1>Etape : 1</h1>
         <label> Nom : </label>
         <label> Prénom : </label><br/>
 
-        <label> Nom du devis : </label><br/>
+        <label> Nom du devis : <%=request.getParameter("nom_devis") %> </label>
+        <br/>
         <div>
             <div>
                 Marque :

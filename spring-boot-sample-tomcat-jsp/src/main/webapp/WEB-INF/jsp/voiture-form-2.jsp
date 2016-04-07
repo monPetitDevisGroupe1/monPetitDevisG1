@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <form action="/voiture3">
+    <form action="/voiture-2">
         <h1>Etape : 2</h1>
         <div>
             <div>
