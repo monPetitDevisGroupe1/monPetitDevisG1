@@ -9,7 +9,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "voiture_etape2")
 public class VoitureEtape2 {
-    private int id;
+    private Integer id;
     private Date datePermis;
     private int nbrAccident;
     private int bonusMalus;
@@ -18,11 +18,11 @@ public class VoitureEtape2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "habitation_etape4")
 public class HabitationEtape4 {
-    private int id;
+    private Integer id;
     private String formule;
     private int prix;
     private Devis devis;
@@ -16,11 +16,11 @@ public class HabitationEtape4 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
