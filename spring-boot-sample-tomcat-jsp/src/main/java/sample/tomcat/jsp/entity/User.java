@@ -1,85 +1,104 @@
 package sample.tomcat.jsp.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
 
 /**
- * Created by S0089075 on 11/02/2016.
+ * Created by Utilisateur on 07/04/2016.
  */
-public class User implements UserDetails {
+@Entity
+public class User {
+    private Integer idUser;
+    private String nom;
+    private String prenom;
+    private Date datePermis;
+    private String typeUser;
+    private List<Devis> devis;
 
-    private String userName;
-    private String password;
-    private boolean accountNonExpired = true;
-    private boolean accountNonLocked = true;
-    private boolean credentialsNonExpired = true;
-    private boolean enabled = true;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user", nullable = false)
+    public Integer getIdUser() {
+        return idUser;
+    }
 
-    private Collection<? extends GrantedAuthority> authorities = null;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
+
+    @Basic
+    @Column(name = "nom", nullable = false, length = 25)
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    @Basic
+    @Column(name = "prenom", nullable = false, length = 25)
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    @Basic
+    @Column(name = "date_permis", nullable = false)
+    public Date getDatePermis() {
+        return datePermis;
+    }
+
+    public void setDatePermis(Date datePermis) {
+        this.datePermis = datePermis;
+    }
+
+    @Basic
+    @Column(name = "type_user", nullable = false, length = 20)
+    public String getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
+    }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> values) {
-        this.authorities = values;
-    }
+        User user = (User) o;
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
+        if (idUser != user.idUser) return false;
+        if (nom != null ? !nom.equals(user.nom) : user.nom != null) return false;
+        if (prenom != null ? !prenom.equals(user.prenom) : user.prenom != null) return false;
+        if (datePermis != null ? !datePermis.equals(user.datePermis) : user.datePermis != null) return false;
+        if (typeUser != null ? !typeUser.equals(user.typeUser) : user.typeUser != null) return false;
 
-    @Override
-    public String getUsername() {
-        return userName;
+        return true;
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
+    public int hashCode() {
+        int result = idUser;
+        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
+        result = 31 * result + (datePermis != null ? datePermis.hashCode() : 0);
+        result = 31 * result + (typeUser != null ? typeUser.hashCode() : 0);
+        return result;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
+    @OneToMany(mappedBy = "user")
+    public List<Devis> getDevis() {
+        return devis;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setDevis(List<Devis> devis) {
+        this.devis = devis;
     }
 }
