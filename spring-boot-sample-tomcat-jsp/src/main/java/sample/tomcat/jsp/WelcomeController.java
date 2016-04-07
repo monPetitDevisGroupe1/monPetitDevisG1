@@ -33,8 +33,14 @@ public class WelcomeController {
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
 
-	@RequestMapping({"/index"})
+	@RequestMapping({"/signIn"})
 	public String welcome(Map<String, Object> model) {
+
+		return "welcome";
+	}
+
+	@RequestMapping({"/index"})
+	public String welcome2(Map<String, Object> model) {
 		model.put("time", new Date());
 		model.put("message", this.message);
 		return "welcome";

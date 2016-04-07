@@ -1,4 +1,4 @@
-package sample.tomcat.jsp;
+package sample.tomcat.jsp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

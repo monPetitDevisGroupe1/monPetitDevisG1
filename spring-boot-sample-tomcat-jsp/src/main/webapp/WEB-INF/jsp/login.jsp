@@ -201,6 +201,7 @@
 				<div id="signup">
 					<h1>Inscription gratuite</h1>
 
+
 					<form action="<c:url value='/inscription'/>" method="GET">
 						<c:if test="${not empty param.err}">
 							<div class="msg-container error">
