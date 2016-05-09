@@ -62,7 +62,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
                 request.getSession().setAttribute("id_user", id_user);
                 request.getSession().setAttribute("token", token);
                 System.out.println("Authentification OK !!!");
-
+                System.out.println("JSON : " + retour);
 
             }else{
                 authentication = null;

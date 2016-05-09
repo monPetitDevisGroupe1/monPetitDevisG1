@@ -277,7 +277,7 @@
 
 						<button class="button button-block"/>Connexion</button>
 
-					</>
+					</form>
 
 				</div>
 
