@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,12 +32,12 @@ public class DevisController {
     @Autowired
     private IDevisService devisService;
 
-    @RequestMapping(path = "/devis", method = RequestMethod.GET)
-    public ModelAndView userAction(@RequestParam(name = "name",required = true) String nom){
-        ModelAndView model = new ModelAndView("devis");
+    @RequestMapping(path = "/private/devis", method = RequestMethod.GET)
+    public ModelAndView userDevis(@ModelAttribute User user){
 
-        model.addObject("devis", new Devis());
-
+        List<Devis> listDevis = user.getDevis();
+        System.out.println("test :" +listDevis);
+        ModelAndView model  = new ModelAndView("devis");;
         return model;
     }
 
@@ -53,6 +54,7 @@ public class DevisController {
 
         return model;
     }
+/*
 
     @Autowired
     private IUserService userService;
@@ -72,6 +74,7 @@ public class DevisController {
 
         return vue;
     }
+*/
 
 
 

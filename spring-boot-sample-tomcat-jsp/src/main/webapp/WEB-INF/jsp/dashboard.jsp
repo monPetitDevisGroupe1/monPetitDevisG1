@@ -11,6 +11,11 @@
     <a href="/private/profil">Gestion du profil </a> | <a href="/logout">D&eacute;connexion</a>
 </div>
 <h1>Mon petit devis</h1>
+
+<h2>
+    <a href="/private/devis">Consultations des Devis </a>
+</h2>
+
 <h2>Dashboard</h2>
 
 <c:if test="${not empty nom}">

@@ -50,7 +50,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
        String retour =  rest.postForObject("http://localhost:8081/login", map, String.class);
-        System.out.println(retour);
+        System.out.println("TEST :" +retour);
         try{
             JSONObject obj = new JSONObject(retour);
             String statut = obj.getString("statut");
