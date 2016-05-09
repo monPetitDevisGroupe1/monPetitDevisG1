@@ -3,6 +3,10 @@ package sample.tomcat.jsp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import sample.tomcat.jsp.entity.User;
+import sample.tomcat.jsp.service.IUserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -17,41 +21,24 @@ import java.util.Map;
  */
 @Controller
 public class ProfilController {
-
+/*
     @Autowired
-    DataSource dataSource;
-    HttpServletRequest request;
+    private IUserService userService;
 
     @RequestMapping({"/private/profil"})
-    public String affichageProfil(Map<String, Object> model) {
-        Statement statement = null;
-        ResultSet resultat;
-        Connection connexion = null;
-        try {
-            connexion = dataSource.getConnection();
+    public ModelAndView affichageProfil(){
+            Integer id =
 
-        } catch ( SQLException e ) {
-    /* Gérer les éventuelles erreurs ici */
-        } finally {
-            if ( connexion != null )
-                try {
+            ModelAndView model = new ModelAndView("profil");
 
-                    statement = connexion.createStatement();
-                    resultat = statement.executeQuery("SELECT * FROM user WHERE id_user = 3");
-                    while(resultat.next()){
-                        model.put("message", "");
-                        model.put("nom", resultat.getString("nom"));
-                        model.put("prenom", resultat.getString("prenom"));
-                        model.put("date_permis", resultat.getString("date_permis"));
-                        }
-                    connexion.close();
-                } catch ( SQLException ignore ) {
-            /* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
-                }
-        }
-        return "profil";
-    }
+            User user = userService.findById(id);
+            System.out.println("user -> " + user.getNom());
+            model.addObject("user", user);
 
+            return model;
+        return null;
+        }*/
+/*
     @RequestMapping({"/private/profil.update"})
     public String sauvegardeProfil(Map<String, Object> model) {
 
@@ -67,7 +54,7 @@ public class ProfilController {
             connexion = dataSource.getConnection();
 
         } catch ( SQLException e ) {
-    /* Gérer les éventuelles erreurs ici */
+
         } finally {
             if ( connexion != null )
                 try {
@@ -87,5 +74,5 @@ public class ProfilController {
         }
         return "profil";
     }
-
+*/
 }

@@ -157,7 +157,7 @@ public class VerticleRunner {
         Route route2 = router.route(HttpMethod.POST, "/signIn");
         route2.handler(routingContext2 -> {
             String username = routingContext2.getBodyAsJson().getString("username");;
-            String mdp = routingContext2.getBodyAsJson().getString("username");;
+            String mdp = routingContext2.getBodyAsJson().getString("password");;
            // String mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
@@ -174,7 +174,7 @@ public class VerticleRunner {
                 System.out.println("connexion sql :" + sql.succeeded() );
                 JsonObject reponseVertx2 = new JsonObject();
                 if (sql.succeeded()) {
-                    System.out.println("connexion reussi username :"+username+" le mdp crypté est :"+mdpCrypt);
+
                     SQLConnection connection = sql.result();
                     try {
                         connection.queryWithParams("INSERT INTO user (pseudo, mdp) VALUES (?,?)",

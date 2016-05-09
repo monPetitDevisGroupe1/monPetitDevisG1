@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User,Integer> {
 
     User findByNom(String nom);
+    User findById(Integer id_user);
 
     /*
     @Query(value = "select u.nom from User where u.login = :login")

@@ -9,7 +9,7 @@ import java.util.List;
  */
 @Entity
 public class User {
-    private Integer idUser;
+    private Integer id;
     private String nom;
     private String prenom;
     private Date datePermis;
@@ -19,12 +19,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", nullable = false)
-    public Integer getIdUser() {
-        return idUser;
+    public Integer getId() {
+        return id;
     }
-
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Basic
@@ -74,7 +73,7 @@ public class User {
 
         User user = (User) o;
 
-        if (idUser != user.idUser) return false;
+        if (id != user.getId()) return false;
         if (nom != null ? !nom.equals(user.nom) : user.nom != null) return false;
         if (prenom != null ? !prenom.equals(user.prenom) : user.prenom != null) return false;
         if (datePermis != null ? !datePermis.equals(user.datePermis) : user.datePermis != null) return false;
@@ -85,7 +84,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = idUser;
+        int result = getId();
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
         result = 31 * result + (datePermis != null ? datePermis.hashCode() : 0);

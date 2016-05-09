@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * Created by Pierre on 06/04/2016.
- */
+ **/
 @Controller
 public class InscriptionController {
 

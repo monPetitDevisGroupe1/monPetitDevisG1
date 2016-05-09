@@ -20,6 +20,8 @@ public class UserService implements IUserService {
         return userRepository.findByNom(name);
     }
 
+    @Override
+    public User findById(Integer id) { return userRepository.findById(id);}
 
     @Override
     public User save(User user){
