@@ -10,4 +10,5 @@ import sample.tomcat.jsp.entity.User;
 public interface DevisRepository extends CrudRepository<Devis,Integer> {
 
     Devis save(Devis devis);
+    Devis findByUser(User user);
 }

@@ -54,6 +54,25 @@ public class DevisController {
         return model;
     }
 
+    @Autowired
+    private IUserService userService;
+
+    @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
+    public ModelAndView devisAffiche(@ModelAttribute User user){
+        ModelAndView vue = new ModelAndView("dashboard");
+
+        User user2 = userService.findByName("Cencier");
+        Devis devisSaved = devisService.findByUser(user2);
+
+        if (devisSaved == null){
+            vue.setViewName("403");
+        } else {
+            vue.addObject("devis", devisSaved);
+        }
+
+        return vue;
+    }
+
 
 
 

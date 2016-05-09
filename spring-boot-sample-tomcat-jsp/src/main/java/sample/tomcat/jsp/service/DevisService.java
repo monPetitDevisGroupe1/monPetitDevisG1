@@ -26,4 +26,9 @@ public class DevisService implements IDevisService {
         return devisRepository.save(devis);
     }
 
+    @Override
+    public Devis findByUser(User user){
+        return devisRepository.findByUser(user);
+    }
+
 }
