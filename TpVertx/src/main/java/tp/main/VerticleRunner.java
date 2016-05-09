@@ -176,7 +176,7 @@ public class VerticleRunner {
 
                     SQLConnection connection = sql.result();
                     try {
-                        connection.queryWithParams("INSERT INTO user (pseudo, mdp) VALUES (?,?)",
+                        connection.updateWithParams("INSERT INTO user (pseudo, mdp) VALUES (?,?)",
                                 new JsonArray().add(username).add(mdpCrypt), res2 -> {
                             System.out.println("requete  :" + res2.result());
                             if (res2.succeeded()) {
@@ -188,6 +188,8 @@ public class VerticleRunner {
                                 String token = jwt.generateToken(new JsonObject(), new JWTOptions().setExpiresInSeconds(60L));
                                 reponseVertx2.put("statut", "OK");
                                 reponseVertx2.put("token", token);
+                                int id = res2.result().getKeys().getInteger(0);
+                                reponseVertx2.put("id", id);
                                 routingContext2.response().end(reponseVertx2.encode());
 
                             } else {
