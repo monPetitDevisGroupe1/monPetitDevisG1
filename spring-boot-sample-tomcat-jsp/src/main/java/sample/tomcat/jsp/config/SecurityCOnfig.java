@@ -3,6 +3,7 @@ package sample.tomcat.jsp.config;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -52,6 +53,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> http");
 
         //http.csrf().disable();
+        //http.authorizeRequests().anyRequest().permitAll();
         http.authorizeRequests().antMatchers("/index", "/login", "/fail", "fail2","/css/*").permitAll()
                 //.antMatchers("/private/admin/**").hasRole("ADMIN")
                 .antMatchers("/private/**").fullyAuthenticated()
@@ -86,7 +88,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
     }
 
 
-/*
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         System.out.println("configure -> auth");
@@ -96,7 +98,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService()).passwordEncoder(new ShaPasswordEncoder());
 
     }
-    */
+
 
     @Autowired
     private CustomAuthProvider customAuthProvider;
