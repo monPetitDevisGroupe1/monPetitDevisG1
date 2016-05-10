@@ -1,27 +1,16 @@
 package sample.tomcat.jsp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import sample.tomcat.jsp.entity.Devis;
 import sample.tomcat.jsp.entity.User;
-import sample.tomcat.jsp.service.IDevisService;
 import sample.tomcat.jsp.service.IUserService;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-import java.util.Map;
+
+
 
 /**
  * Created by Pierre on 05/04/2016.
@@ -30,28 +19,37 @@ import java.util.Map;
 public class DevisController {
 
     @Autowired
-    private IDevisService devisService;
+    private IUserService userService;
 
-    @RequestMapping(path = "/private/devis", method = RequestMethod.GET)
-    public ModelAndView userAction(@RequestParam(name = "name",required = true) String nom){
+    @RequestMapping(path = "/private/devis")
+    public ModelAndView userDevis(){
+
         ModelAndView model = new ModelAndView("devis");
 
-        model.addObject("devis", new Devis());
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.findByNom(username);
+
+
+        List<Devis> listDevis = user.getDevis();
+        String prenom = user.getPrenom();
+        System.out.println("TEST PAGE DEVIS :" + listDevis + prenom);
 
         return model;
     }
 
     @RequestMapping(path = "/private/devis/save", method = RequestMethod.POST)
-    public ModelAndView devisActionSave(@ModelAttribute Devis devis){
-        ModelAndView model = new ModelAndView("userAfterSave");
-
-        Devis devisSaved = devisService.save(devis);
+    public void devisActionSave(@ModelAttribute Devis devis){
+       ModelAndView model = new ModelAndView("userAfterSave");
+    }
+/*
+        //Devis devisSaved = devisService.save(devis);
         System.out.println("user/save -> " + devis.getNom());
         if (devisSaved == null){
             model.setViewName("errorSave");
         }
-        return model;
-    }
+        return model;*/
+
+/*
 
     @Autowired
     private IUserService userService;
@@ -69,7 +67,7 @@ public class DevisController {
         }
 
         return vue;
-    }*/
+    */
 
 
 

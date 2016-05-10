@@ -13,24 +13,36 @@
 <body>
 
 <form action="/devisValidate" methode="POST">
-    <h1>Creer un devis</h1>
 
-    <input type="hidden" name="id_popo" value="<%=request.getParameter("id_devis") %>" >
     <div>
-        <div>
-            Nom du devis :
-            <input type="text" name="nom_devis" >
-        </div>
-        <div>
-            Type du devis :
-            <select name="type_devis">
-                <option value="voiture" selected>Voiture</option>
-                <option value="habitation">Habitation</option>
-            </select>
-        </div>
+        <h2>Listes des devis</h2>
+        <p>${sessionScope.id_user}</p>
+
+
     </div>
 
-    <input type="submit" value="Commencer mon devis" />
+
+        <form action="<c:url value='/wizard'/>" method="GET">
+            <h1>Creer un devis</h1>
+            <input type="hidden" name="id_popo" value="<%=request.getParameter("id_devis") %>" >
+            <div>
+                <div>
+                    Nom du devis :
+                    <input type="text" name="nom_devis" >
+                </div>
+                <div>
+                    Type du devis :
+                    <select name="type_devis">
+                        <option value="voiture" selected>Voiture</option>
+                        <option value="habitation">Habitation</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" value="voiture">Nouveau Devis Voiture</button>
+        </form>
+
+
 </form>
 
 </body>

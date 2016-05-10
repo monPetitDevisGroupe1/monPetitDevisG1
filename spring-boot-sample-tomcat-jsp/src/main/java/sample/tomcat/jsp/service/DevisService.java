@@ -21,8 +21,6 @@ public class DevisService implements IDevisService {
     private DevisRepository devisRepository;
 
 
-
-
     @Override
     public Devis save(Devis devis){
         return devisRepository.save(devis);

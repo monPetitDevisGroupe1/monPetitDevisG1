@@ -94,11 +94,14 @@ public class VerticleRunner {
                 System.out.println(res.cause());
                 System.out.println("connexion sql" + res.succeeded() );
                 JsonObject reponseVertx = new JsonObject();
+                System.out.println("TEST" + res.succeeded() + "Reponse" + reponseVertx);
                 if (res.succeeded()) {
                     System.out.println("connexion reussi username :"+username);
                     SQLConnection connection = res.result();
                     System.out.println("connexion - avant requete  :"+res.result());
+                    System.out.println("Entre1" + connection);
                     try {
+                        System.out.println("Entre2");
                         System.out.println("SELECT * from user WHERE pseudo='" + username + "'");
                         connection.query("SELECT * from user WHERE pseudo='" + username + "'", res2 -> {
                             System.out.println("requete  :" + res2.result().getNumRows());
