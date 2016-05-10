@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import sample.tomcat.jsp.entity.ApplicationData;
 import sample.tomcat.jsp.entity.User;
 import sample.tomcat.jsp.service.IUserService;
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +31,13 @@ public class ProfilController {
     @Autowired
     private IUserService userService;
 
-  //  @Autowired
-  //  SessionScope session;
+    @Autowired
+    private ApplicationData applicationData;
 
     @RequestMapping({"/private/profil"})
     public ModelAndView affichageProfil(){
 
-        String username = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.findByNom(username);
-       //User user = userService.findById(30);
+        User user = userService.findById(applicationData.getId());
 
         ModelAndView model = new ModelAndView("profil");
         model.addObject("nom", user.getNom());
@@ -47,15 +46,18 @@ public class ProfilController {
 
         RestTemplate rest = new RestTemplate();
         Map map = new HashMap();
+
+        map.put("id", user.getId());
         map.put("update", false);
 
+        System.out.println("On se connecte à VertX!");
         String retour =  rest.postForObject("http://localhost:8081/profil", map, String.class);
 
         System.out.println(retour);
         try{
             JSONObject obj = new JSONObject(retour);
             String pseudo = obj.getString("pseudo");
-            model.addObject("pseudo", pseudo);
+            model.addObject("username", pseudo);
 
         }catch(JSONException e) {
             System.out.println(e);
