@@ -18,6 +18,13 @@
     <a href="/private/devis">Consultations des Devis </a>
 </h2>
 
+<form action="<c:url value='/wizard'/>" method="GET">
+    <button type="submit" value="voiture">Nouveau Devis Voiture</button>
+</form>
+<form action="<c:url value='/wizard'/>" method="GET">
+    <button type="submit" value="habitation">Nouveau Devis Habitation</button>
+</form>
+
 <h2>Dashboard</h2>
 
 <c:if test="${not empty nom}">
