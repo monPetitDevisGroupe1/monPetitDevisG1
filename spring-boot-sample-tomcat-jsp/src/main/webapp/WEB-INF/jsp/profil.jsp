@@ -7,18 +7,23 @@
     <title>Profil</title>
 </head>
 <body>
-<form id="form" action="/profil.update" method="POST">
+<form id="form" action="<c:url value='/private/profil.update'/>" method="GET">
     <table>
         <tr>
-            <td>Nom : </td><td><input type="text" name="username" value="${nom}" /></td>
+            <td>Identifiant : </td><td><input type="text" name="username" value="${username}" /></td>
         </tr>
         <tr>
-            <td>Pr&eacute;nom : </td><td><input type="text" name="username" value="${prenom}" /></td>
+            <td>Mot de passe : </td><td><input type="password" name="password" value="" /></td>
         </tr>
+        <tr>
+            <td>Nom : </td><td><input type="text" name="nom" value="${nom}" /></td>
+        </tr>
+        <tr>
+            <td>Pr&eacute;nom : </td><td><input type="text" name="prenom" value="${prenom}" /></td>
+        </tr>
+        <tr><td>Date du permis : </td><td><input type="date" name="datepermis" value="${date_permis}" /> </td></tr>
     </table>
-    <div class="submit-container">
-        <input value="Enregistrer" name="submit" type="submit" class="submit-btn"/>
-    </div>
+    <button type="submit" class="button button-block"/>C'est parti !</button>   <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
 </form>
 
 </body>

@@ -31,7 +31,7 @@ public class DevisController {
     @Autowired
     private IDevisService devisService;
 
-    @RequestMapping(path = "/devis", method = RequestMethod.GET)
+    @RequestMapping(path = "/private/devis", method = RequestMethod.GET)
     public ModelAndView userAction(@RequestParam(name = "name",required = true) String nom){
         ModelAndView model = new ModelAndView("devis");
 
@@ -40,17 +40,15 @@ public class DevisController {
         return model;
     }
 
-    @RequestMapping(path = "/devis/save", method = RequestMethod.POST)
+    @RequestMapping(path = "/private/devis/save", method = RequestMethod.POST)
     public ModelAndView devisActionSave(@ModelAttribute Devis devis){
         ModelAndView model = new ModelAndView("userAfterSave");
 
         Devis devisSaved = devisService.save(devis);
         System.out.println("user/save -> " + devis.getNom());
-
         if (devisSaved == null){
             model.setViewName("errorSave");
         }
-
         return model;
     }
 
@@ -60,8 +58,7 @@ public class DevisController {
     @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
     public ModelAndView devisAffiche(@ModelAttribute User user){
         ModelAndView vue = new ModelAndView("dashboard");
-
-        User user2 = userService.findByName("Cencier");
+        User user2 = userService.findByNom("Cencier");
         Devis devisSaved = devisService.findByUser(user2);
 
         if (devisSaved == null){

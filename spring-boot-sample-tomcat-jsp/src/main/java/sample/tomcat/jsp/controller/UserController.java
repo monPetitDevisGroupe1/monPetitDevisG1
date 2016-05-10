@@ -20,7 +20,7 @@ public class UserController {
     public ModelAndView userAction(@RequestParam(name = "name",required = true) String nom){
         ModelAndView model = new ModelAndView("user");
 
-        User user = userService.findByName(nom);
+        User user = userService.findByNom(nom);
         System.out.println("user -> " + user.getNom());
         model.addObject("user", user);
 

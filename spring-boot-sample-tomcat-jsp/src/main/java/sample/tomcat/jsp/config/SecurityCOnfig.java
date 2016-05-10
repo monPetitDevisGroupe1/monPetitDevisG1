@@ -94,7 +94,6 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter {
         System.out.println("configure -> auth");
 
         auth.authenticationProvider(this.customAuthProvider);
-
         auth.userDetailsService(userDetailsService()).passwordEncoder(new ShaPasswordEncoder());
 
     }

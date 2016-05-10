@@ -17,7 +17,7 @@ public class User {
     private List<Devis> devis;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", nullable = false)
     public Integer getId() {
         return id;
@@ -37,7 +37,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "prenom", nullable = false, length = 25)
+    @Column(name = "prenom", nullable = true, length = 25)
     public String getPrenom() {
         return prenom;
     }
@@ -47,7 +47,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "date_permis", nullable = false)
+    @Column(name = "date_permis", nullable = true)
     public Date getDatePermis() {
         return datePermis;
     }
@@ -57,7 +57,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "type_user", nullable = false, length = 20)
+    @Column(name = "type_user", nullable = true, length = 20)
     public String getTypeUser() {
         return typeUser;
     }
