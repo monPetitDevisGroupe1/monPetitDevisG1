@@ -24,7 +24,7 @@
             </tr>
             <tr><td>Date du permis : </td><td><input type="date" name="datepermis" value="${date_permis}" /> </td></tr>
         </table>
-        <button type="submit" class="button button-block"/>C'est parti !</button>   <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
+        <button type="submit" class="button button-block"/>Enregistrer</button>   <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
     </form>
 </div>
 <div style = "float: left; margin-left: 50px;">

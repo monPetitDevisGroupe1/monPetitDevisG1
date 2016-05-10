@@ -12,25 +12,23 @@
 
 <html>
 <head>
-    <title> Devis Voiture</title>
+    <title> Devis Habitation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
-    <form:form action="/wizard?_page=2" method="POST" modelAttribute="modelWizard.voitureEtape1">
+<h1> Nom : ${user.nom}</h1>
+<h1>Prenom : ${user.prenom}</h1>
+    <form:form action="/wizard.habitation?_page=2" method="POST" modelAttribute="modelWizard.habitationEtape2">
         <h1>Etape : 1</h1>
-        <h1> Nom : ${user.nom}</h1>
-        <h1>Prenom : ${user.prenom}</h1>
+        <h1> Nom :</h1>
+        <h1>Prenom :</h1>
         <h1>Nom Devis :</h1>
         <br/>
-        <form:label  path="marque">Marque :</form:label>
-        <form:input  path="marque" />
-        <form:label path="modele">Model :</form:label>
-        <form:input  path="modele" />
-        <form:label path="carburant">Carburant :</form:label>
-        <form:input  path="carburant" />
-        <form:label path="chevauxFisc">Chevaux :</form:label>
-        <form:input  path="chevauxFisc" />
+        <form:label  path="typeHabitation">Type d'habitation :</form:label>
+        <form:input  path="typeHabitation" />
+        <form:label path="surface">Surface :</form:label>
+        <form:input  path="surface" />
 
         <input type="submit">Valider et aller à l'étape suivante</input>
     </form:form>

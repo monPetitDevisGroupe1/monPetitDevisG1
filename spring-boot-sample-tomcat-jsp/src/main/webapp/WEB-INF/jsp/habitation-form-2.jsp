@@ -13,22 +13,24 @@
 
 <html>
 <head>
-    <title> Devis Voiture</title>
+    <title> Devis Habitation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1> Nom : ${user.nom}</h1>
 <h1>Prenom : ${user.prenom}</h1>
-    <form:form action="/wizard?_page=3" method="POST" modelAttribute="modelWizard.voitureEtape2">
+    <form:form action="/wizard.habitation?_page=3" method="POST" modelAttribute="modelWizard.habitationEtape2">
         <h1> Etape : 2</h1>
-        <form:label  path="datePermis"> Date du permis :</form:label>
-        <form:input path="datePermis" /> <BR>
-        <form:label  path="nbrAccident"> Nombre d’accident :</form:label>
-        <form:input path="nbrAccident" /> <BR>
-        <form:label  path="bonusMalus"> Bonus malus :</form:label>
-        <form:input path="bonusMalus" /> <BR>
+        <form:label  path="nbrPiece"> Nombre de pièces :</form:label>
+        <form:input path="nbrPiece" /> <BR>
+        <form:label  path="etage"> Nombre d’étages :</form:label>
+        <form:input path="etage" /> <BR>
+        <form:label  path="nbrSalleBain"> Nombre de salles de bains :</form:label>
+        <form:input path="nbrSalleBain" /> <BR>
+        <form:label  path="garage"> Nombre de garage :</form:label>
+        <form:input path="garage" /> <BR>
     <input type="submit" value="Valider et passer a l'etape 3" />
     </form:form>
-    <a href="/wizard?_page2">Precedent</a>
+    <a href="/wizard.habitation?_page2">Precedent</a>
 </body>
 </html>
