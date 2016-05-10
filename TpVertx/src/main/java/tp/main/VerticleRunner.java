@@ -252,7 +252,7 @@ public class VerticleRunner {
                             } else if(final_mdpCrypt != null && !final_mdpCrypt.isEmpty()) {
                                 updateQuery += "mdp = '" + final_mdpCrypt + "' ";
                             }
-                            connection.updateWithParams("UPDATE user " + updateQuery + " WHERE id =" + id,
+                            connection.updateWithParams("UPDATE user " + updateQuery + " WHERE id =" + final_id,
                                     new JsonArray().add(final_username).add(final_mdpCrypt), res3 -> {
                                         System.out.println("requete  :" + res3.result());
                                         if (res3.succeeded()) {
