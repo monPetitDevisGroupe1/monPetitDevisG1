@@ -18,18 +18,14 @@
 </head>
 <body>
 
-    <form:form action="/wizard?_page=4" method="POST" modelAttribute="modelWizard.voitureEtape3">
-        <h1>Etape : 3</h1>
-        <form:label  path="dorsGarage"> Au garage :</form:label>
-        <form:input path="dorsGarage" /> <BR>
-        <form:label  path="adresseGarage"> Adresse si garage :</form:label>
-        <form:input path="adresseGarage" /> <BR>
-        <form:label  path="conducteurPrincipal"> Conducteur principale :</form:label>
-        <form:input path="conducteurPrincipal" /> <BR>
-        <form:label  path="conducteurSecondaire"> Conducteur econdaire :</form:label>
-        <form:input path="conducteurSecondaire" /> <BR>
+    <form:form action="/private/dashboard" method="POST" modelAttribute="modelWizard.voitureEtape4">
+        <h1> Etape : 4 </h1>
+        <form:label  path="prix"> Prix :</form:label>
+        <form:input path="prix" /> <BR>
+        <form:label  path="formule"> Formule abonnement :</form:label>
+        <form:input path="formule" /> <BR>
         <input type="submit" value="Valider et passer a l'etape 4" />
     </form:form>
-    <a href="/wizard?_page=2">Previous</a>
+    <a href="/wizard?_page=3">Previous</a>
 </body>
 </html>

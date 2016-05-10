@@ -1,3 +1,4 @@
 /TpVertx/.idea
 /spring-boot-sample-tomcat-jsp/.idea
 .idea
+spring-boot-sample-tomcat-jsp/target/spring-boot-sample-tomcat-jsp-1.3.2.RELEASE/WEB-INF/classes/application.properties

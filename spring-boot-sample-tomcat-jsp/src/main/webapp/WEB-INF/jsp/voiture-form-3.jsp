@@ -7,8 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page language="java" import="javax.servlet.jsp.PageContext" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" import="javax.servlet.jsp.PageContext" %>>
 
 <html>
 <head>
@@ -17,29 +18,18 @@
 </head>
 <body>
 
-    <form action="/voiture3">
+    <form:form action="/wizard?_page=4" method="POST" modelAttribute="modelWizard.voitureEtape3">
         <h1>Etape : 3</h1>
-
-        <div>
-            <div>
-                Conducteur principal :
-                <input type="text" name="conduc-princ">
-            </div>
-            <div>
-                Conducteur secondaire :
-                <input type="text" name="conduc-sec">
-            </div>
-            <div>
-                Dors dans un garage :
-                <input type="checkbox" name="dors-garagge">
-            </div>
-            <div>
-                Adresse :
-                <input type="text" name="adresse-garage">
-            </div>
-        </div>
-        <input type="submit" value="Submit" />
-    </form>
-    <a href="/voiture2">Previous</a>
+        <form:label  path="dorsGarage"> Au garage :</form:label>
+        <form:input path="dorsGarage" /> <BR>
+        <form:label  path="adresseGarage"> Adresse si garage :</form:label>
+        <form:input path="adresseGarage" /> <BR>
+        <form:label  path="conducteurPrincipal"> Conducteur principale :</form:label>
+        <form:input path="conducteurPrincipal" /> <BR>
+        <form:label  path="conducteurSecondaire"> Conducteur econdaire :</form:label>
+        <form:input path="conducteurSecondaire" /> <BR>
+        <input type="submit" value="Valider et passer a l'etape 4" />
+    </form:form>
+    <a href="/wizard?_page=2">Previous</a>
 </body>
 </html>

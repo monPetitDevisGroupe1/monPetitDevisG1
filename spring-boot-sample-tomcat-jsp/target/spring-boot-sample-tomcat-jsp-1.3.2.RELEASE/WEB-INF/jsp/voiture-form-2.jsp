@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" import="javax.servlet.jsp.PageContext" %>
 
 <html>
@@ -16,24 +18,16 @@
 </head>
 <body>
 
-    <form action="/voiture-2">
-        <h1>Etape : 2</h1>
-        <div>
-            <div>
-                Date du permis :
-                <input type="date" name="permis">
-            </div>
-            <div>
-                Nombre d’accident :
-                <input type="number" name="nbr-accident">
-            </div>
-            <div>
-                Bonus malus :
-                <input type="number" name="bonus-malus">
-            </div>
-        </div>
-        <input type="submit" value="Submit" />
-    </form>
-    <a href="/voiture">Previous</a>
+    <form:form action="/wizard?_page=3" method="POST" modelAttribute="modelWizard.voitureEtape2">
+        <h1> Etape : 2</h1>
+        <form:label  path="datePermis"> Date du permis :</form:label>
+        <form:input path="datePermis" /> <BR>
+        <form:label  path="nbrAccident"> Nombre d’accident :</form:label>
+        <form:input path="nbrAccident" /> <BR>
+        <form:label  path="bonusMalus"> Bonus malus :</form:label>
+        <form:input path="bonusMalus" /> <BR>
+    <input type="submit" value="Valider et passer a l'etape 3" />
+    </form:form>
+    <a href="/wizard?_page2">Precedent</a>
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import sample.tomcat.jsp.entity.ApplicationData;
 import sample.tomcat.jsp.entity.User;
 import sample.tomcat.jsp.service.IUserService;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +31,13 @@ public class ProfilController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ApplicationData applicationData;
+
     @RequestMapping({"/private/profil"})
     public ModelAndView affichageProfil(){
 
-        String username = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.findByNom(username);
-       //User user = userService.findById(30);
+        User user = userService.findById(applicationData.getId());
 
         ModelAndView model = new ModelAndView("profil");
         model.addObject("nom", user.getNom());

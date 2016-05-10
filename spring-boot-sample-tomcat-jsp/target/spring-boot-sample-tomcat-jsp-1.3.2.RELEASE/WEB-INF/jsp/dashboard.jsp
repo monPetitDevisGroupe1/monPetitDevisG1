@@ -21,9 +21,12 @@
 <form action="<c:url value='/wizard'/>" method="GET">
     <button type="submit" value="voiture">Nouveau Devis Voiture</button>
 </form>
+<<<<<<< HEAD
 <form action="<c:url value='/wizard'/>" method="GET">
     <button type="submit" value="habitation">Nouveau Devis Habitation</button>
 </form>
+=======
+>>>>>>> 7f69f4027cdb7d7dfc751feabdda619c5a3f6bb6
 
 <h2>Dashboard</h2>
 
