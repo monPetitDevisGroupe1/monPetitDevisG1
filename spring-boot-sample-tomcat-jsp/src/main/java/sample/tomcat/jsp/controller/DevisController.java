@@ -8,8 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import sample.tomcat.jsp.entity.Devis;
 import sample.tomcat.jsp.entity.User;
 import sample.tomcat.jsp.service.IUserService;
-
 import java.util.List;
+
+
 
 /**
  * Created by Pierre on 05/04/2016.
@@ -52,12 +53,12 @@ public class DevisController {
 
     @Autowired
     private IUserService userService;
-
+/*
     @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
     public ModelAndView devisAffiche(@ModelAttribute User user){
         ModelAndView vue = new ModelAndView("dashboard");
         User user2 = userService.findByNom("Cencier");
-        Devis devisSaved = devisService.findByUser(user2);
+        List<Devis> devisSaved = devisService.findByUser(user2);
 
         if (devisSaved == null){
             vue.setViewName("403");
@@ -66,8 +67,7 @@ public class DevisController {
         }
 
         return vue;
-    }
-*/
+    */
 
 
 

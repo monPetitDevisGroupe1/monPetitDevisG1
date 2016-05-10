@@ -216,15 +216,16 @@ public class VerticleRunner {
 //  / requete recuperer pseudo uniquement
         Route route3 = router.route(HttpMethod.POST, "/profil");
         route3.handler(routingContext3 -> {
-            String mode = routingContext3.getBodyAsJson().getString("update");
-            String id = "";
+            Boolean mode = routingContext3.getBodyAsJson().getBoolean("update");
+            System.out.println("Mode : " + mode);
+            Integer id = 0;
             String username = "";
             String mdp = "";
             String mdpCrypt = "";
-            if (mode.equals("true")) {
-                id = routingContext3.getBodyAsJson().getString("id");
+            if (!mode) {
+                id = routingContext3.getBodyAsJson().getInteger("id");
             } else {
-                id = routingContext3.getBodyAsJson().getString("id");
+                id = routingContext3.getBodyAsJson().getInteger("id");
                 username = routingContext3.getBodyAsJson().getString("pseudo");
                 mdp = routingContext3.getBodyAsJson().getString("password");
                 mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
@@ -239,24 +240,27 @@ public class VerticleRunner {
             System.out.println("connexion sql creation " + mySQLClient3);
             final String final_username = username;
             final String final_mdpCrypt = mdpCrypt;
-            final String final_id = id;
+            final Integer final_id = id;
             mySQLClient3.getConnection(sql2 -> {
                 System.out.println(sql2.cause());
                 System.out.println("connexion sql :" + sql2.succeeded() );
                 JsonObject reponseVertx3 = new JsonObject();
                 if (sql2.succeeded()) {
-
                     SQLConnection connection = sql2.result();
                     try {
-                        if (mode.equals("true")) {
+                        if (mode) {
                             String updateQuery = "SET ";
+                           //JsonArray jsonsArray = new JsonArray();
                             if(final_username != null && !final_username.isEmpty()) {
                                 updateQuery += "pseudo = '" + final_username + "' ";
+                                //jsonsArray.add(final_username);
                             } else if(final_mdpCrypt != null && !final_mdpCrypt.isEmpty()) {
                                 updateQuery += "mdp = '" + final_mdpCrypt + "' ";
+                                //jsonsArray.add(final_mdpCrypt);
                             }
-                            connection.updateWithParams("UPDATE user " + updateQuery + " WHERE id =" + final_id,
-                                    new JsonArray().add(final_username).add(final_mdpCrypt), res3 -> {
+                            System.out.println(final_username + " - " + final_mdpCrypt);
+                            connection.updateWithParams("UPDATE user " + updateQuery + " WHERE id_user ='" + final_id + "'",
+                                    new JsonArray(), res3 -> {
                                         System.out.println("requete  :" + res3.result());
                                         if (res3.succeeded()) {
                                             reponseVertx3.put("statut", "OK");
@@ -269,7 +273,9 @@ public class VerticleRunner {
                                         }
                                     });
                         } else {
-                            connection.query("SELECT pseudo from user WHERE id='"+ final_id +"'", res3 -> {
+
+                            connection.query("SELECT pseudo from user WHERE id_user='"+ final_id +"'", res3 -> {
+                                System.out.println("requete  :" + res3.result().getNumRows());
                                     if (res3.result().getNumRows() > 0) {
                                         ResultSet resultSet2 = res3.result();
                                         List<JsonArray> results = resultSet2.getResults();

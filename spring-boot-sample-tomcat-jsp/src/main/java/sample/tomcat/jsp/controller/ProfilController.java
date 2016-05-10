@@ -30,9 +30,6 @@ public class ProfilController {
     @Autowired
     private IUserService userService;
 
-  //  @Autowired
-  //  SessionScope session;
-
     @RequestMapping({"/private/profil"})
     public ModelAndView affichageProfil(){
 
@@ -47,15 +44,18 @@ public class ProfilController {
 
         RestTemplate rest = new RestTemplate();
         Map map = new HashMap();
+
+        map.put("id", user.getId());
         map.put("update", false);
 
+        System.out.println("On se connecte à VertX!");
         String retour =  rest.postForObject("http://localhost:8081/profil", map, String.class);
 
         System.out.println(retour);
         try{
             JSONObject obj = new JSONObject(retour);
             String pseudo = obj.getString("pseudo");
-            model.addObject("pseudo", pseudo);
+            model.addObject("username", pseudo);
 
         }catch(JSONException e) {
             System.out.println(e);
