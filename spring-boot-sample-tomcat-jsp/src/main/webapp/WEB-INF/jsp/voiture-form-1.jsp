@@ -17,7 +17,7 @@
 
 <body>
 
-    <form action="/voiture-1" methode="POST">
+    <form:form action="/wizard?_page=2" method="post" modelAttribute="modelWizard">
         <input type="hidden" name="id_popo" value="<%=request.getParameter("id_devis") %>" >
         <h1>Etape : 1</h1>
         <label> Nom : </label>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <input type="submit" value="Submit" />
-    </form>
+    </form:form>
 
 
 

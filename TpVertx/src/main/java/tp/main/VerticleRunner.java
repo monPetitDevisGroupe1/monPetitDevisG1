@@ -210,6 +210,98 @@ public class VerticleRunner {
                 routingContext2.response().putHeader("content-type", "type/text");
             });
         });
+//  / requete recuperer pseudo uniquement
+        Route route3 = router.route(HttpMethod.POST, "/profil");
+        route3.handler(routingContext3 -> {
+            String mode = routingContext3.getBodyAsJson().getString("update");
+            String id = "";
+            String username = "";
+            String mdp = "";
+            String mdpCrypt = "";
+            if (mode.equals("true")) {
+                id = routingContext3.getBodyAsJson().getString("id");
+            } else {
+                id = routingContext3.getBodyAsJson().getString("id");
+                username = routingContext3.getBodyAsJson().getString("pseudo");
+                mdp = routingContext3.getBodyAsJson().getString("password");
+                mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+            }
+            JsonObject mySQLClientConfig = new JsonObject();
+            mySQLClientConfig.put("host", "localhost");
+            mySQLClientConfig.put("port", 3306);
+            mySQLClientConfig.put("username", "MPD");
+            mySQLClientConfig.put("password", "kebab");
+            mySQLClientConfig.put("database", "mon-petit-vertx");
+            AsyncSQLClient mySQLClient3 = MySQLClient.createShared(vertxVariable, mySQLClientConfig);
+            System.out.println("connexion sql creation " + mySQLClient3);
+            final String final_username = username;
+            final String final_mdpCrypt = mdpCrypt;
+            final String final_id = id;
+            mySQLClient3.getConnection(sql2 -> {
+                System.out.println(sql2.cause());
+                System.out.println("connexion sql :" + sql2.succeeded() );
+                JsonObject reponseVertx3 = new JsonObject();
+                if (sql2.succeeded()) {
+
+                    SQLConnection connection = sql2.result();
+                    try {
+                        if (mode.equals("true")) {
+                            String updateQuery = "SET ";
+                            if(final_username != null && !final_username.isEmpty()) {
+                                updateQuery += "pseudo = '" + final_username + "' ";
+                            } else if(final_mdpCrypt != null && !final_mdpCrypt.isEmpty()) {
+                                updateQuery += "mdp = '" + final_mdpCrypt + "' ";
+                            }
+                            connection.updateWithParams("UPDATE user " + updateQuery + " WHERE id =" + id,
+                                    new JsonArray().add(final_username).add(final_mdpCrypt), res3 -> {
+                                        System.out.println("requete  :" + res3.result());
+                                        if (res3.succeeded()) {
+                                            reponseVertx3.put("statut", "OK");
+                                            routingContext3.response().end(reponseVertx3.encode());
+
+                                        } else {
+                                            reponseVertx3.put("statut", "ERROR");
+                                            reponseVertx3.put("raison", "UPDATE FAILED ID NOT FOUND OR BAD PARAMETERS");
+                                            routingContext3.response().end(reponseVertx3.encode());
+                                        }
+                                    });
+                        } else {
+                            connection.query("SELECT pseudo from user WHERE id='"+ final_id +"'", res3 -> {
+                                    if (res3.result().getNumRows() > 0) {
+                                        ResultSet resultSet2 = res3.result();
+                                        List<JsonArray> results = resultSet2.getResults();
+                                        for (JsonArray row : results) {
+                                            String pseudo = row.getString(0);
+                                            if (pseudo != null && !pseudo.isEmpty()) {
+                                                reponseVertx3.put("statut", "OK");
+                                                reponseVertx3.put("pseudo", pseudo);
+                                                routingContext3.response().end(reponseVertx3.encode());
+                                            } else {
+                                                reponseVertx3.put("statut", "ERROR");
+                                                reponseVertx3.put("raison", "pseudo unknown");
+                                                routingContext3.response().end(reponseVertx3.encode());
+                                            }
+                                    }
+                                } else {
+                                    reponseVertx3.put("statut", "ERROR");
+                                    reponseVertx3.put("raison", "pseudo not found");
+                                    routingContext3.response().end(reponseVertx3.encode());
+                                }
+                                    });
+                        }
+                    } catch ( Exception e ) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("echec " + sql2.result());
+                    reponseVertx3.put("statut", "ERROR");
+                    reponseVertx3.put("raison", "RESEAU");
+                    routingContext3.response().end(reponseVertx3.encode());
+                }
+                routingContext3.response().putHeader("content-type", "type/text");
+            });
+        });
+
         vertxVariable.createHttpServer().requestHandler(router::accept).listen(8081);
     }
     public static void genereKeystore() throws Exception {
