@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" import="javax.servlet.jsp.PageContext" %>
 
 <html>
 <head>
@@ -16,37 +17,22 @@
 </head>
 
 <body>
-
-    <form:form action="/wizard?_page=2" method="post" modelAttribute="modelWizard">
-        <input type="hidden" name="id_popo" value="<%=request.getParameter("id_devis") %>" >
+    <form:form action="/wizard?_page=2" method="POST" modelAttribute="modelWizard.voitureEtape1">
         <h1>Etape : 1</h1>
-        <label> Nom : </label>
-        <label> Prénom : </label><br/>
-
-        <label> Nom du devis : <%=request.getParameter("nom_devis") %> </label>
+        <h1> Nom :</h1>
+        <h1>Prenom :</h1>
+        <h1>Nom Devis :</h1>
         <br/>
-        <div>
-            <div>
-                Marque :
-                <input type="text" name="marque">
-            </div>
-            <div>
-                Model :
-                <input type="text" name="modele">
-            </div>
-            <div>
-                Carburant :
-                <input type="text" name="carburant">
-            </div>
-            <div>
-                Chevaux fiscaux :
-                <input type="text" name="chevaux">
-            </div>
-        </div>
-        <input type="submit" value="Submit" />
+        <form:label  path="marque">Marque :</form:label>
+        <form:input  path="marque" />
+        <form:label path="modele">Model :</form:label>
+        <form:input  path="modele" />
+        <form:label path="carburant">Carburant :</form:label>
+        <form:input  path="carburant" />
+        <form:label path="chevauxFisc">Chevaux :</form:label>
+        <form:input  path="chevauxFisc" />
+
+        <input type="submit">Valider et aller à l'étape suivante</input>
     </form:form>
-
-
-
 </body>
 </html>

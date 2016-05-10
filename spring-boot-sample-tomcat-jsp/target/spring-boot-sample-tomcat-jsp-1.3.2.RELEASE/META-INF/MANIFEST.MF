@@ -1,9 +1,16 @@
 Manifest-Version: 1.0
 Implementation-Title: Spring Boot Tomcat JSP Sample
 Implementation-Version: 1.3.2.RELEASE
-Built-By: Pierre
+<<<<<<< HEAD
+Built-By: Utilisateur
 Implementation-Vendor-Id: org.springframework.boot
 Created-By: IntelliJ IDEA
-Build-Jdk: 1.8.0_65
+Build-Jdk: 1.8.0_66
+=======
+Built-By: Deruy
+Implementation-Vendor-Id: org.springframework.boot
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_74
+>>>>>>> 7f69f4027cdb7d7dfc751feabdda619c5a3f6bb6
 Main-Class: ${start-class}
 

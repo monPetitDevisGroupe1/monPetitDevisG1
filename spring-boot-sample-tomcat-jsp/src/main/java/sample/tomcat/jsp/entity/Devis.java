@@ -89,7 +89,7 @@ public class Devis {
         return result;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true)
     public HabitationEtape1 getHabitationEtape1() {
         return habitationEtape1;
     }
@@ -98,7 +98,7 @@ public class Devis {
         this.habitationEtape1 = habitationEtape1;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true)
     public HabitationEtape2 getHabitationEtape2() {
         return habitationEtape2;
     }
@@ -107,7 +107,7 @@ public class Devis {
         this.habitationEtape2 = habitationEtape2;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true)
     public HabitationEtape3 getHabitationEtape3() {
         return habitationEtape3;
     }
@@ -116,7 +116,7 @@ public class Devis {
         this.habitationEtape3 = habitationEtape3;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true)
     public HabitationEtape4 getHabitationEtape4() {
         return habitationEtape4;
     }

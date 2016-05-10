@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Utilisateur on 07/04/2016.
  */
 @Entity
-@Table(name = "habitation_etape2", schema = "mon-petit-devis", catalog = "")
+@Table(name = "habitation_etape2")
 public class HabitationEtape2 {
     private Integer id;
     private int nbrPiece;
@@ -93,7 +93,7 @@ public class HabitationEtape2 {
     }
 
     @OneToOne
-    @JoinColumn(name = "id_devis", referencedColumnName = "id_devis", nullable = false)
+    @JoinColumn(name = "id_devis",  nullable = false)
     public Devis getDevis() {
         return devis;
     }
