@@ -2,10 +2,8 @@ package sample.tomcat.jsp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * Created by S0089075 on 11/02/2016.
@@ -30,22 +28,5 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/voiture3").setViewName("voiture-form-3");
         registry.addViewController("/savev1").setViewName("save-v1");
     }
-    /*
-    @Bean(name = "dataSource")
-    public DriverManagerDataSource dataSource() {
-        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost/mon-petit-devis");
-        driverManagerDataSource.setUsername("Dylan");
-        driverManagerDataSource.setPassword("123Dylan456");
-        return driverManagerDataSource;
-    }
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/jsp/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }*/
 
 }

@@ -35,4 +35,16 @@ public class DevisService implements IDevisService {
     public List<Devis> findByUserOrderByIdDevisDesc(User user){
         return devisRepository.findByUserOrderByIdDevisDesc(user);
     }
+
+    @Override
+    public List<Devis> findByUserAndEtape(User user, int etape){
+        return devisRepository.findByUserAndEtape(user, etape);
+    }
+
+    @Override
+    public void remove(Devis devis){
+        devisRepository.remove(devis);
+    }
+
+
 }
