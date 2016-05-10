@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import sample.tomcat.jsp.entity.ApplicationData;
+import sample.tomcat.jsp.entity.Devis;
 import sample.tomcat.jsp.entity.User;
+import sample.tomcat.jsp.service.IDevisService;
 import sample.tomcat.jsp.service.IUserService;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
@@ -32,6 +34,9 @@ public class ProfilController {
     private IUserService userService;
 
     @Autowired
+    private IDevisService devisService;
+
+    @Autowired
     private ApplicationData applicationData;
 
     @RequestMapping({"/private/profil"})
@@ -43,6 +48,13 @@ public class ProfilController {
         model.addObject("nom", user.getNom());
         model.addObject("prenom", user.getPrenom());
         model.addObject("date_permis", user.getDatePermis());
+
+        List<Devis> listeDevis = devisService.findByUser(user);
+        List<Devis> listeDevisFinis = devisService.findByUserAndEtape(user, 4);
+
+        model.addObject("nbDevis", listeDevis.size());
+        model.addObject("nbDevisFinis", listeDevisFinis.size());
+        model.addObject("nbDevisEnCours", listeDevis.size() - listeDevisFinis.size());
 
         RestTemplate rest = new RestTemplate();
         Map map = new HashMap();
@@ -83,13 +95,21 @@ public class ProfilController {
         modelRetour.addObject("username", newUsername);
 
 
+
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
         System.out.println("On va récupérer l'user : ");
-        String username = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(username);
-        User user = userService.findByNom(username);
+
+        User user = userService.findById(applicationData.getId());
+
+        List<Devis> listeDevis = devisService.findByUser(user);
+        List<Devis> listeDevisFinis = devisService.findByUserAndEtape(user, 4);
+
+        modelRetour.addObject("nbDevis", listeDevis.size());
+        modelRetour.addObject("nbDevisFinis", listeDevisFinis.size());
+        modelRetour.addObject("nbDevisEnCours", listeDevis.size() - listeDevisFinis.size());
+
         System.out.println("User trouvé !");
         user.setNom(nom);
         user.setPrenom(prenom);

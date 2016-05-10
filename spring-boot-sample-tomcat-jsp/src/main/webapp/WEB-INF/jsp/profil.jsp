@@ -7,24 +7,42 @@
     <title>Profil</title>
 </head>
 <body>
-<form id="form" action="<c:url value='/private/profil.update'/>" method="GET">
+<div style = "float: left;">
+    <form id="form" action="<c:url value='/private/profil.update'/>" method="GET">
+        <table>
+            <tr>
+                <td>Identifiant : </td><td><input type="text" name="username" value="${username}" /></td>
+            </tr>
+            <tr>
+                <td>Mot de passe : </td><td><input type="password" name="password" value="" /></td>
+            </tr>
+            <tr>
+                <td>Nom : </td><td><input type="text" name="nom" value="${nom}" /></td>
+            </tr>
+            <tr>
+                <td>Pr&eacute;nom : </td><td><input type="text" name="prenom" value="${prenom}" /></td>
+            </tr>
+            <tr><td>Date du permis : </td><td><input type="date" name="datepermis" value="${date_permis}" /> </td></tr>
+        </table>
+        <button type="submit" class="button button-block"/>Enregistrer</button>   <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
+    </form>
+</div>
+<div style = "float: left; margin-left: 50px;">
     <table>
         <tr>
-            <td>Identifiant : </td><td><input type="text" name="username" value="${username}" /></td>
+            <td>Nombre devis en cours : </td>
+            <td>${nbDevisEnCours}</td>
         </tr>
         <tr>
-            <td>Mot de passe : </td><td><input type="password" name="password" value="" /></td>
+            <td>Nombre devis finis : </td>
+            <td>${nbDevisFinis}</td>
         </tr>
         <tr>
-            <td>Nom : </td><td><input type="text" name="nom" value="${nom}" /></td>
+            <td>Nombre devis total : </td>
+            <td>${nbDevis}</td>
         </tr>
-        <tr>
-            <td>Pr&eacute;nom : </td><td><input type="text" name="prenom" value="${prenom}" /></td>
-        </tr>
-        <tr><td>Date du permis : </td><td><input type="date" name="datepermis" value="${date_permis}" /> </td></tr>
-    </table>
-    <button type="submit" class="button button-block"/>C'est parti !</button>   <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
-</form>
 
+    </table>
+</div>
 </body>
 </html>
