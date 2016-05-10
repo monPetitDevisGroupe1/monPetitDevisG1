@@ -30,13 +30,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/voiture3").setViewName("voiture-form-3");
         registry.addViewController("/savev1").setViewName("save-v1");
     }
+    /*
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         driverManagerDataSource.setUrl("jdbc:mysql://localhost/mon-petit-devis");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("");
+        driverManagerDataSource.setUsername("Dylan");
+        driverManagerDataSource.setPassword("123Dylan456");
         return driverManagerDataSource;
     }
     @Bean
@@ -45,6 +46,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/jsp/");
         resolver.setSuffix(".jsp");
         return resolver;
-    }
+    }*/
 
 }

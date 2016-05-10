@@ -1,5 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" import="javax.servlet.jsp.PageContext" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Profil</title>
@@ -7,6 +9,12 @@
 <body>
 <form id="form" action="<c:url value='/private/profil.update'/>" method="GET">
     <table>
+        <tr>
+            <td>Identifiant : </td><td><input type="text" name="username" value="${username}" /></td>
+        </tr>
+        <tr>
+            <td>Mot de passe : </td><td><input type="password" name="password" value="" /></td>
+        </tr>
         <tr>
             <td>Nom : </td><td><input type="text" name="nom" value="${nom}" /></td>
         </tr>
