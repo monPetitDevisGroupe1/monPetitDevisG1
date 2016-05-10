@@ -84,8 +84,8 @@ public class VerticleRunner {
             mySQLClientConfig.put("host", "localhost");
             mySQLClientConfig.put("port", 3306);
           //  mySQLClientConfig.put("maxPoolSize", 10);
-            mySQLClientConfig.put("username", "MPD");
-            mySQLClientConfig.put("password", "kebab");
+            mySQLClientConfig.put("username", "admin");
+            mySQLClientConfig.put("password", "admin");
             mySQLClientConfig.put("database", "mon-petit-vertx");
 
             AsyncSQLClient mySQLClient = MySQLClient.createShared(vertxVariable, mySQLClientConfig);

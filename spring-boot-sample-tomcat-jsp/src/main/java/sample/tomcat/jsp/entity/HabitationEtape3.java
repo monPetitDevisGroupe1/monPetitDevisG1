@@ -80,7 +80,7 @@ public class HabitationEtape3 {
     }
 
     @OneToOne
-    @JoinColumn(name = "id_devis", referencedColumnName = "id_devis", nullable = false)
+    @JoinColumn(name = "id_devis",  nullable = false)
     public Devis getDevis() {
         return devis;
     }
