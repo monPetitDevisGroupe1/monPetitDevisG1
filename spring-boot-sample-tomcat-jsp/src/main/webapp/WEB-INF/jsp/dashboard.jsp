@@ -15,7 +15,7 @@
 <h1>Mon petit devis</h1>
 
 <h2>
-    <a href="/private/devis">Consultations des Devis </a>
+    <a href="/private/tab-devis">Tableau de devis </a>
 </h2>
 
 <form action="<c:url value='/wizard'/>" method="GET">

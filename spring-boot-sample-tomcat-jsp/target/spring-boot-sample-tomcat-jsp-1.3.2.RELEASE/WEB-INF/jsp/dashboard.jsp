@@ -15,18 +15,15 @@
 <h1>Mon petit devis</h1>
 
 <h2>
-    <a href="/private/devis">Consultations des Devis </a>
+    <a href="/private/tab-devis">Tableau de devis </a>
 </h2>
 
 <form action="<c:url value='/wizard'/>" method="GET">
     <button type="submit" value="voiture">Nouveau Devis Voiture</button>
 </form>
-<<<<<<< HEAD
 <form action="<c:url value='/wizard'/>" method="GET">
     <button type="submit" value="habitation">Nouveau Devis Habitation</button>
 </form>
-=======
->>>>>>> 7f69f4027cdb7d7dfc751feabdda619c5a3f6bb6
 
 <h2>Dashboard</h2>
 
