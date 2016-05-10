@@ -18,12 +18,10 @@
     <a href="/private/devis">Consultations des Devis </a>
 </h2>
 
-<form action="<c:url value='/wizard'/>" method="GET">
-    <button type="submit" value="voiture">Nouveau Devis Voiture</button>
+<form action="<c:url value='/private/devis'/>" method="GET">
+    <button type="submit" value="voiture">Nouveau Devis</button>
 </form>
-<form action="<c:url value='/wizard'/>" method="GET">
-    <button type="submit" value="habitation">Nouveau Devis Habitation</button>
-</form>
+
 
 <h2>Dashboard</h2>
 

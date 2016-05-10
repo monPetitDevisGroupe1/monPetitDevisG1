@@ -12,19 +12,11 @@
 </head>
 <body>
 
-<form action="/devisValidate" methode="POST">
-
     <div>
-        <h2>Listes des devis</h2>
-        <p>${sessionScope.id_user}</p>
-
-
+        <h2>Creation d'un devis</h2>
     </div>
-
-
-        <form action="<c:url value='/wizard'/>" method="GET">
+        <form action="/private/devis.create" method="GET">
             <h1>Creer un devis</h1>
-            <input type="hidden" name="id_popo" value="<%=request.getParameter("id_devis") %>" >
             <div>
                 <div>
                     Nom du devis :
@@ -38,12 +30,8 @@
                     </select>
                 </div>
             </div>
-
-            <button type="submit" value="voiture">Nouveau Devis Voiture</button>
+            <button type="submit" value="voiture">Nouveau Devis</button>
         </form>
-
-
-</form>
 
 </body>
 </html>

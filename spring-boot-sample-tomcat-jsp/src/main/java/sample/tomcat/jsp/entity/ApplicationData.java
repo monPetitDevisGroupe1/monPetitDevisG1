@@ -13,6 +13,8 @@ public class ApplicationData {
 
     private Integer id;
     private String pseudo;
+    private Integer idDevis;
+    private String nomDevis;
 
     public Integer getId() {
         return id;
@@ -26,6 +28,20 @@ public class ApplicationData {
     }
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
+    }
+
+    public Integer getIdDevis() {
+        return idDevis;
+    }
+    public void setIdDevis(Integer idDevis) {
+        this.idDevis = idDevis;
+    }
+
+    public String getNomDevis() {
+        return pseudo;
+    }
+    public void setNomDevis(String nomDevis) {
+        this.nomDevis = nomDevis;
     }
 
 }
