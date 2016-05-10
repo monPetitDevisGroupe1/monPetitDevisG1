@@ -7,6 +7,8 @@ import sample.tomcat.jsp.dao.UserRepository;
 import sample.tomcat.jsp.entity.Devis;
 import sample.tomcat.jsp.entity.User;
 
+import java.util.List;
+
 
 /**
  * Created by Utilisateur on 07/04/2016.
@@ -27,8 +29,12 @@ public class DevisService implements IDevisService {
     }
 
     @Override
-    public Devis findByUser(User user){
+    public List<Devis> findByUser(User user){
         return devisRepository.findByUser(user);
     }
 
+    @Override
+    public List<Devis> findByUserOrderByIdDevisDesc(User user){
+        return devisRepository.findByUserOrderByIdDevisDesc(user);
+    }
 }

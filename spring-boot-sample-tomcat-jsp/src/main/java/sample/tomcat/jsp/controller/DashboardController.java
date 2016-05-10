@@ -1,13 +1,19 @@
 package sample.tomcat.jsp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sample.tomcat.jsp.entity.ApplicationData;
+import sample.tomcat.jsp.entity.Devis;
+import sample.tomcat.jsp.entity.User;
 import sample.tomcat.jsp.service.IDevisService;
+import sample.tomcat.jsp.service.IUserService;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,12 +24,29 @@ public class DashboardController {
 
     @Autowired
     IDevisService devisService;
+    @Autowired
+    IUserService userService;
+    @Autowired
+    private ApplicationData applicationData;
 
     @RequestMapping({"/private/dashboard", "/private"})
     public String dashboard(Map<String, Object> model) {
 
-        //devisService.
+        User user = userService.findById(applicationData.getId());
+        List<Devis> listeDevis = devisService.findByUserOrderByIdDevisDesc(user);
+        if(listeDevis.size() > 0){
+            Devis devis = listeDevis.get(0);
+            model.put("nom", devis.getNom());
+            model.put("type_devis", devis.getTypeDevis());
+            model.put("etape", devis.getEtape());
 
+
+
+
+
+
+
+        }
 
                       /* while( resultatEtapes.next()){
                             model.put("carburant",  resultatEtapes.getString("carburant"));

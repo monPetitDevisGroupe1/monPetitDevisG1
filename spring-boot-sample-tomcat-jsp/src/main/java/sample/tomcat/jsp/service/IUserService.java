@@ -9,7 +9,6 @@ import sample.tomcat.jsp.entity.User;
 @Component
 public interface IUserService {
     User findByNom(String name);
-    User findById(Integer id)   ;
-
+    User findById(Integer id);
     User save(User user);
 }

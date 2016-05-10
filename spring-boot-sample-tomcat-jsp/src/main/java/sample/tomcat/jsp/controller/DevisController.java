@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,12 +55,12 @@ public class DevisController {
 
     @Autowired
     private IUserService userService;
-
+/*
     @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
     public ModelAndView devisAffiche(@ModelAttribute User user){
         ModelAndView vue = new ModelAndView("dashboard");
         User user2 = userService.findByNom("Cencier");
-        Devis devisSaved = devisService.findByUser(user2);
+        List<Devis> devisSaved = devisService.findByUser(user2);
 
         if (devisSaved == null){
             vue.setViewName("403");
@@ -68,7 +69,7 @@ public class DevisController {
         }
 
         return vue;
-    }
+    }*/
 
 
 

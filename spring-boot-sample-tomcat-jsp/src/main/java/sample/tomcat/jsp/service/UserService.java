@@ -15,7 +15,7 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
+
     public User findByNom(String name){
         System.out.println("On recherche l'utilisateur " + name);
         return userRepository.findByNom(name);

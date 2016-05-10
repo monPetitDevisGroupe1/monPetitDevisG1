@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.json.*;
+import sample.tomcat.jsp.entity.ApplicationData;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
@@ -34,6 +35,9 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
     @Autowired
     HttpServletRequest request;
+
+    @Autowired
+    private ApplicationData applicationData;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -61,6 +65,10 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
                 request.getSession().setAttribute("id_user", id_user);
                 request.getSession().setAttribute("token", token);
+
+                applicationData.setId(id_user);
+                applicationData.setPseudo(username);
+
                 System.out.println("Authentification OK !!!");
                 System.out.println("JSON : " + retour);
 
