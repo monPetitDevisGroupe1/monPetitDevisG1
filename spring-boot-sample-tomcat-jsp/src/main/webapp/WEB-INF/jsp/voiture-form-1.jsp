@@ -19,8 +19,8 @@
 <body>
     <form:form action="/wizard?_page=2" method="POST" modelAttribute="modelWizard.voitureEtape1">
         <h1>Etape : 1</h1>
-        <h1> Nom :</h1>
-        <h1>Prenom :</h1>
+        <h1> Nom : ${user.nom}</h1>
+        <h1>Prenom : ${user.prenom}</h1>
         <h1>Nom Devis :</h1>
         <br/>
         <form:label  path="marque">Marque :</form:label>
