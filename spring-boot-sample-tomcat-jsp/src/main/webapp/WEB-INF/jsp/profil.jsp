@@ -8,6 +8,12 @@
 <form id="form" action="<c:url value='/private/profil.update'/>" method="GET">
     <table>
         <tr>
+            <td>Identifiant : </td><td><input type="text" name="username" value="${username}" /></td>
+        </tr>
+        <tr>
+            <td>Mot de passe : </td><td><input type="password" name="password" value="" /></td>
+        </tr>
+        <tr>
             <td>Nom : </td><td><input type="text" name="nom" value="${nom}" /></td>
         </tr>
         <tr>
