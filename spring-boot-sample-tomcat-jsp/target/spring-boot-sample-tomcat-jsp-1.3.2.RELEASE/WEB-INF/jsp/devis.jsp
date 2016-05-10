@@ -16,7 +16,7 @@
 
     <div>
         <h2>Listes des devis</h2>
-        <p>${sessionScope.id_user}${sessionScope.nom}${sessionScope.prenom}</p>
+        <p>${sessionScope.id_user}</p>
 
 
     </div>
