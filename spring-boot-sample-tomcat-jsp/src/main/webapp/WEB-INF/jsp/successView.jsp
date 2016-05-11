@@ -8,8 +8,7 @@
 		<!--<link href="<c:url value='/jsp/static/favicon.ico'/>" rel="shortcut icon"> -->
 	</head>
 	<body>
-		Step 1 : ${modelWizard.step1} <br/>
-		Step 2 : ${modelWizard.step2} <br/>
-		Step 3 : ${modelWizard.step3} <br/>
+	<strong> Le devis a bien été enregistré </strong>
+	<a href="/private/dashboaard">Retour au dasshboard</a>
 	</body>
 </html>
