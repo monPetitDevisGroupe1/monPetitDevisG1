@@ -18,7 +18,7 @@
     <c:forEach var="listValue" items="${listeValeurs}">
         <tr>
             <th>${listeValue.get(0)} : </th>
-            <td>${listeValue.get(0)}</td>
+            <td>${listeValue.get(1)}</td>
         </tr>
     </c:forEach>
     </table>
