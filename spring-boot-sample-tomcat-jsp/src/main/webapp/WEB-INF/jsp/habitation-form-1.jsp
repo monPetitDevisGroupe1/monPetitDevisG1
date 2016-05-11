@@ -20,7 +20,7 @@
 <h1>Nom Devis : ${nom_devis}</h1>
 <h1> Nom : ${user.nom}</h1>
 <h1>Prenom : ${user.prenom}</h1>
-    <form:form action="/wizard.habitation?_page=2" method="POST" modelAttribute="modelWizard.habitationEtape1">
+    <form:form action="/private/wizard.habitation?_page=2" method="POST" modelAttribute="modelWizard.habitationEtape1">
         <h1>Etape : 1</h1>
         <br/>
         <form:label  path="typeHabitation">Type d'habitation :</form:label>

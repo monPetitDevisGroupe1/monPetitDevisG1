@@ -20,7 +20,7 @@
 <h1>Nom Devis : ${nom_devis}</h1>
 <h1> Nom : ${user.nom}</h1>
 <h1>Prenom : ${user.prenom}</h1>
-    <form:form action="/wizard?_page=3" method="POST" modelAttribute="modelWizard.voitureEtape2">
+    <form:form action="/private/wizard?_page=3" method="POST" modelAttribute="modelWizard.voitureEtape2">
         <h1> Etape : 2</h1>
         <form:label  path="datePermis"> Date du permis (yyyy-jj-mm) :</form:label>
         <form:input path="datePermis" /> <BR>

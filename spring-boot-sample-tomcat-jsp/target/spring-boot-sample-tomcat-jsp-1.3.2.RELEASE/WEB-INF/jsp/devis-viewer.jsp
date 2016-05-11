@@ -13,6 +13,7 @@
 </head>
 <body>
 <h1>Visualisation d'un devis</h1>
+<p><em>${message}</em></p>
 <h2>${nom}</h2>
 <div>
     <table>
@@ -25,7 +26,7 @@
     </table>
 </div>
 
-
+<a href = "<c:url value='/private/dashboard'/>">Retour au dashboard</a>
 
 </body>
 </html>

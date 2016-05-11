@@ -52,9 +52,9 @@ public class DevisController {
         devisService.save(devis);
         String url;
         if(typeDevis.equals("voiture")){
-            url = "/wizard";
+            url = "/private/wizard";
         }else{
-            url = "/wizard.habitation";
+            url = "/private/wizard.habitation";
         }
         ModelAndView model = new ModelAndView("redirect:" + url);
 
@@ -73,34 +73,29 @@ public class DevisController {
     public void devisActionSave(@ModelAttribute Devis devis){
        ModelAndView model = new ModelAndView("userAfterSave");
     }
-/*
-        //Devis devisSaved = devisService.save(devis);
-        System.out.println("user/save -> " + devis.getNom());
-        if (devisSaved == null){
-            model.setViewName("errorSave");
+
+    @RequestMapping(path = "/private/devis.reprise")
+    public ModelAndView repriseDevis() {
+        String idDevis = request.getParameter("idDevis");
+        int id = Integer.parseInt(idDevis);
+        Devis devis = devisService.findByIdDevis(id);
+
+        applicationData.setDevis(devis);
+        applicationData.setIdDevis(id);
+        applicationData.setNomDevis(devis.getNom());
+        String url;
+        if(devis.getTypeDevis().equals("voiture")){
+            url = "/private/wizard";
+        }else{
+            url = "/private/wizard.habitation";
         }
-        return model;*/
-
-/*
-
-    @Autowired
-    private IUserService userService;
-/*
-    @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
-    public ModelAndView devisAffiche(@ModelAttribute User user){
-        ModelAndView vue = new ModelAndView("dashboard");
-        User user2 = userService.findByNom("Cencier");
-        List<Devis> devisSaved = devisService.findByUser(user2);
-
-        if (devisSaved == null){
-            vue.setViewName("403");
-        } else {
-            vue.addObject("devis", devisSaved);
+        String etapeUrl = "";
+        if(devis.getEtape() > 1){
+            etapeUrl = "?_page=" + devis.getEtape();
         }
-
-        return vue;
-    */
-
+        ModelAndView modelReturn = new ModelAndView("redirect:" + url + etapeUrl);
+        return modelReturn;
+    }
 
 
 

@@ -20,7 +20,7 @@
 <h1>Nom Devis : ${nom_devis}</h1>
 <h1> Nom : ${user.nom}</h1>
 <h1>Prenom : ${user.prenom}</h1>
-    <form:form action="/wizard?_finish" method="POST" modelAttribute="modelWizard.voitureEtape4">
+    <form:form action="/private/wizard?_finish" method="POST" modelAttribute="modelWizard.voitureEtape4">
         <h1> Etape : 4 </h1>
         <form:label  path="prix"> Prix :</form:label>
         <form:input path="prix" /> <BR>

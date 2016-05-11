@@ -38,8 +38,13 @@
                                 <button type="submit" name = "idDevis" value="${listValue.getIdDevis()}">Visualiser</button>
                             </form>
                         </td>
-                        <td><a href=""> Reprise </a></td>
-
+                        <c:if test="true">
+                            <td>
+                                <form action="<c:url value='/private/devis.reprise'/>" method="GET">
+                                    <button type="submit" name = "idDevis" value="${listValue.getIdDevis()}">Reprise</button>
+                                </form>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </table>

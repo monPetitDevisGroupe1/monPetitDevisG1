@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <form:form action="/wizard?_page=2" method="POST" modelAttribute="modelWizard.voitureEtape1">
+    <form:form action="/private/wizard?_page=2" method="POST" modelAttribute="modelWizard.voitureEtape1">
         <h1>Etape : 1</h1>
         <h1>Nom Devis : ${nom_devis}</h1>
         <h1> Nom : ${user.nom}</h1>

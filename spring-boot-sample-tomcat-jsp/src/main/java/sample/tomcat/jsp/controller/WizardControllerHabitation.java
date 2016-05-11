@@ -15,7 +15,7 @@ import sample.tomcat.jsp.service.*;
  * Created by Dylan on 05/04/2016.
  */
 @Controller
-@RequestMapping("/wizard.habitation")
+@RequestMapping("/private/wizard.habitation")
 @SessionAttributes("modelWizard")
 public class WizardControllerHabitation {
 
