@@ -74,7 +74,7 @@ public class ProfilController {
         requestHeaders.set(HttpHeaders.AUTHORIZATION, "token " + token);
         HttpEntity<?> httpEntity = new HttpEntity<Object>(map, requestHeaders);
 
-        String retour = rest.postForObject("http://localhost:8081/signIn", httpEntity, String.class);
+        String retour = rest.postForObject("http://localhost:8081/profil", httpEntity, String.class);
 
         //String retour =  rest.postForObject("http://localhost:8081/profil", map, String.class);
 
@@ -146,7 +146,15 @@ public class ProfilController {
             map.put("password", password);
             map.put("update", true);
 
-            String retour =  rest.postForObject("http://localhost:8081/profil", map, String.class);
+            String token = (String)request.getSession().getAttribute("token");
+
+
+            HttpHeaders requestHeaders = new HttpHeaders();
+
+            requestHeaders.set(HttpHeaders.AUTHORIZATION, "token " + token);
+            HttpEntity<?> httpEntity = new HttpEntity<Object>(map, requestHeaders);
+
+            String retour =  rest.postForObject("http://localhost:8081/profil", httpEntity, String.class);
             System.out.println(retour);
         }
 

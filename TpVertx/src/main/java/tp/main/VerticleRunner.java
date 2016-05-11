@@ -218,6 +218,8 @@ public class VerticleRunner {
             if (authorization != null) {
                 String[] parts = authorization.split(" ");
                 String sscheme = parts[0];
+                System.out.println("part0 : " + parts[0]);
+                System.out.println("part1 : " + parts[1]);
                 if (!"token".equals(sscheme)) {
                     routingContext3.fail(400);
                     return;
