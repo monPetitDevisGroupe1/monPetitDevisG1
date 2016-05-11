@@ -43,7 +43,7 @@ public class WizardControllerHabitation {
     public ModelAndView processWizard() {
         ModelAndView modelHabitation = new  ModelAndView("habitation-form-1","modelWizard", new DevisHabitation());
         User user = userCourant.findById(session.getId());
-        modelHabitation.addObject("User", user);
+        modelHabitation.addObject("user", user);
         return modelHabitation;
     }
 
@@ -65,7 +65,7 @@ public class WizardControllerHabitation {
         }
         User user = userCourant.findById(session.getId());
         ModelAndView modelHabitation = new ModelAndView(pageViews[currentPage-1],"modelWizard",modelWizard);
-        modelHabitation.addObject("User", user);
+        modelHabitation.addObject("user", user);
         return modelHabitation;
     }
     /**
