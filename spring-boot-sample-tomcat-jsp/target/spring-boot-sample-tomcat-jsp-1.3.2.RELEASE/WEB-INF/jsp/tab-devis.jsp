@@ -16,9 +16,6 @@
     <h1>Tableau des devis</h1>
 
 
-    <form id="form" action="<c:url value='/private/tab-devis.update'/>" method="GET">
-
-
         <c:if test="${not empty listeDevis}">
 
             <table>
@@ -46,7 +43,7 @@
         </c:if>
 
        <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
-    </form>
+
 
 
 </body>

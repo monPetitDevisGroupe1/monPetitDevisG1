@@ -45,6 +45,9 @@ public class DevisService implements IDevisService {
     public void delete(Devis devis){
         devisRepository.delete(devis);
     }
-
+    @Override
+    public void deleteByIdDevis(int id){
+        devisRepository.deleteByIdDevis(id);
+    }
 
 }

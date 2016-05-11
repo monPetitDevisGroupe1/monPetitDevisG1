@@ -66,7 +66,7 @@ public class TabDevisController {
 
         
         System.out.println("entre dans le delete" + idDevis);
-        delete(idDevis);
+        devisService.deleteByIdDevis(Integer.parseInt(idDevis));
         ModelAndView modelReturn = new ModelAndView("tab-devis");
 
         return modelReturn;

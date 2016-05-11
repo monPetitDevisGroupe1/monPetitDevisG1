@@ -17,4 +17,5 @@ public interface IDevisService {
     List<Devis> findByUserOrderByIdDevisDesc(User user);
     List<Devis> findByUserAndEtape(User user, int etape);
     void delete(Devis devis);
+    void deleteByIdDevis(int id);
 }
