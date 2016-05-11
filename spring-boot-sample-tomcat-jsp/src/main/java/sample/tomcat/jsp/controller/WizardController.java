@@ -40,6 +40,7 @@ public class WizardController {
 
     @RequestMapping
     public ModelAndView processWizard() {
+        
         ModelAndView modelHabitation = new ModelAndView("voiture-form-1","modelWizard", new DevisVoiture());
         User user = userCourant.findById(session.getId());
         modelHabitation.addObject("user", user);

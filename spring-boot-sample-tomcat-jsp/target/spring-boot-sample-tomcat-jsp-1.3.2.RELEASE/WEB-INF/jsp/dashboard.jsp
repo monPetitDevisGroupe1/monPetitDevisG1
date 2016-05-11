@@ -18,6 +18,7 @@
     <a href="/private/tab-devis">Tableau de devis </a>
 </h2>
 
+
 <form action="<c:url value='/private/devis'/>" method="GET">
     <button type="submit" value="voiture">Nouveau Devis</button>
 </form>
