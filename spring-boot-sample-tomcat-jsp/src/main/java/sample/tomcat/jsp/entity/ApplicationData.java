@@ -15,6 +15,7 @@ public class ApplicationData {
     private String pseudo;
     private Integer idDevis;
     private String nomDevis;
+    private Devis devis;
 
     public Integer getId() {
         return id;
@@ -34,12 +35,18 @@ public class ApplicationData {
     public Integer getIdDevis() {
         return idDevis;
     }
+    public Devis getDevis() {
+        return devis;
+    }
+    public void setDevis(Devis devis) {
+        this.devis = devis;
+    }
     public void setIdDevis(Integer idDevis) {
         this.idDevis = idDevis;
     }
 
     public String getNomDevis() {
-        return pseudo;
+        return nomDevis;
     }
     public void setNomDevis(String nomDevis) {
         this.nomDevis = nomDevis;

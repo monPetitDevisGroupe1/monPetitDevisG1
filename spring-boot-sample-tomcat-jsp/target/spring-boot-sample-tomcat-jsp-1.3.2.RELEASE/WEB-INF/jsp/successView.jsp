@@ -9,6 +9,6 @@
 	</head>
 	<body>
 	<strong> Le devis a bien été enregistré </strong>
-	<a href="/private/dashboaard">Retour au dasshboard</a>
+	<a href="/private/dashboard">Retour au dasshboard</a>
 	</body>
 </html>

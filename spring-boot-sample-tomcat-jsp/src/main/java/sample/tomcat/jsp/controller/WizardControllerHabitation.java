@@ -32,6 +32,9 @@ public class WizardControllerHabitation {
     IHabitationEtape2Service habitation2;
 
     @Autowired
+    IDevisService devisService;
+
+    @Autowired
     IHabitationEtape3Service habitation3;
 
     @Autowired
@@ -44,6 +47,8 @@ public class WizardControllerHabitation {
         ModelAndView modelHabitation = new  ModelAndView("habitation-form-1","modelWizard", new DevisHabitation());
         User user = userCourant.findById(session.getId());
         modelHabitation.addObject("user", user);
+        modelHabitation.addObject("id_devis", session.getIdDevis());
+        modelHabitation.addObject("nom_devis", session.getNomDevis());
         return modelHabitation;
     }
 
@@ -54,12 +59,21 @@ public class WizardControllerHabitation {
         // pageViews est un tableau qui renvois le nom de la vue suivant le numéro d'étape
        switch(currentPage) {
             case 2:
+                session.getDevis().setEtape(1);
+                modelWizard.getHabitationEtape1().setDevis(session.getDevis());
+                devisService.save(session.getDevis());
                 habitation1.save(modelWizard.getHabitationEtape1());
                 break;
             case 3:
+                session.getDevis().setEtape(2);
+                modelWizard.getHabitationEtape2().setDevis(session.getDevis());
+                devisService.save(session.getDevis());
                 habitation2.save(modelWizard.getHabitationEtape2());
                 break;
             case 4:
+                session.getDevis().setEtape(3);
+                modelWizard.getHabitationEtape3().setDevis(session.getDevis());
+                devisService.save(session.getDevis());
                 habitation3.save(modelWizard.getHabitationEtape3());
                 break;
         }
@@ -73,6 +87,9 @@ public class WizardControllerHabitation {
      */
     @RequestMapping(params = "_finish")
     public ModelAndView processFinish(@ModelAttribute("modelWizard") DevisHabitation modelWizard, SessionStatus status) {
+        session.getDevis().setEtape(4);
+        modelWizard.getHabitationEtape4().setDevis(session.getDevis());
+        devisService.save(session.getDevis());
         habitation4.save(modelWizard.getHabitationEtape4());
         // suppression de l'objet en session
         status.setComplete();
