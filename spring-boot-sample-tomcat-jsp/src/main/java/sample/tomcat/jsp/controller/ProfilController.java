@@ -3,6 +3,8 @@ package sample.tomcat.jsp.controller;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -63,7 +65,18 @@ public class ProfilController {
         map.put("update", false);
 
         System.out.println("On se connecte à VertX!");
-        String retour =  rest.postForObject("http://localhost:8081/profil", map, String.class);
+
+        String token = (String)request.getSession().getAttribute("token");
+
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+
+        requestHeaders.set(HttpHeaders.AUTHORIZATION, "token " + token);
+        HttpEntity<?> httpEntity = new HttpEntity<Object>(map, requestHeaders);
+
+        String retour = rest.postForObject("http://localhost:8081/signIn", httpEntity, String.class);
+
+        //String retour =  rest.postForObject("http://localhost:8081/profil", map, String.class);
 
         System.out.println(retour);
         try{

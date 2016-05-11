@@ -3,6 +3,9 @@ package sample.tomcat.jsp.controller;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +41,7 @@ public class InscriptionController {
         Map map = new HashMap();
         map.put("username", username);
         map.put("password", password);
+
 
         RestTemplate rest = new RestTemplate();
         String retour =  rest.postForObject("http://localhost:8081/signIn", map, String.class);
