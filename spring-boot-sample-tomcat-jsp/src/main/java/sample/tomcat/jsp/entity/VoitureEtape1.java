@@ -92,7 +92,7 @@ public class VoitureEtape1 {
         return result;
     }
 
-    @OneToOne
+    @OneToOne(optional = true, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_devis", referencedColumnName = "id_devis", nullable = false)
     public Devis getDevis() {
         return devis;

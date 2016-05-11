@@ -228,7 +228,7 @@ public class VerticleRunner {
                 id = routingContext3.getBodyAsJson().getInteger("id");
                 username = routingContext3.getBodyAsJson().getString("pseudo");
                 mdp = routingContext3.getBodyAsJson().getString("password");
-                mdpCrypt = new BCryptPasswordEncoder().encode(mdp);
+
             }
             JsonObject mySQLClientConfig = new JsonObject();
             mySQLClientConfig.put("host", "localhost");
@@ -239,7 +239,7 @@ public class VerticleRunner {
             AsyncSQLClient mySQLClient3 = MySQLClient.createShared(vertxVariable, mySQLClientConfig);
             System.out.println("connexion sql creation " + mySQLClient3);
             final String final_username = username;
-            final String final_mdpCrypt = mdpCrypt;
+            final String final_mdp = mdp;
             final Integer final_id = id;
             mySQLClient3.getConnection(sql2 -> {
                 System.out.println(sql2.cause());
@@ -254,11 +254,14 @@ public class VerticleRunner {
                             if(final_username != null && !final_username.isEmpty()) {
                                 updateQuery += "pseudo = '" + final_username + "' ";
                                 //jsonsArray.add(final_username);
-                            } else if(final_mdpCrypt != null && !final_mdpCrypt.isEmpty()) {
+                            } else if(final_mdp != null && !final_mdp.isEmpty()) {
+
+                                final String final_mdpCrypt = new BCryptPasswordEncoder().encode(final_mdp);
                                 updateQuery += "mdp = '" + final_mdpCrypt + "' ";
                                 //jsonsArray.add(final_mdpCrypt);
+
                             }
-                            System.out.println(final_username + " - " + final_mdpCrypt);
+
                             connection.updateWithParams("UPDATE user " + updateQuery + " WHERE id_user ='" + final_id + "'",
                                     new JsonArray(), res3 -> {
                                         System.out.println("requete  :" + res3.result());

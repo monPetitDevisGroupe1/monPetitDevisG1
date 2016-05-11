@@ -89,7 +89,7 @@ public class Devis {
         return result;
     }
 
-    @OneToOne(mappedBy = "devis",optional = true)
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public HabitationEtape1 getHabitationEtape1() {
         return habitationEtape1;
     }
@@ -98,7 +98,7 @@ public class Devis {
         this.habitationEtape1 = habitationEtape1;
     }
 
-    @OneToOne(mappedBy = "devis",optional = true)
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public HabitationEtape2 getHabitationEtape2() {
         return habitationEtape2;
     }
@@ -107,7 +107,7 @@ public class Devis {
         this.habitationEtape2 = habitationEtape2;
     }
 
-    @OneToOne(mappedBy = "devis",optional = true)
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public HabitationEtape3 getHabitationEtape3() {
         return habitationEtape3;
     }
@@ -116,7 +116,7 @@ public class Devis {
         this.habitationEtape3 = habitationEtape3;
     }
 
-    @OneToOne(mappedBy = "devis",optional = true)
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public HabitationEtape4 getHabitationEtape4() {
         return habitationEtape4;
     }
@@ -125,7 +125,7 @@ public class Devis {
         this.habitationEtape4 = habitationEtape4;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public VoitureEtape1 getVoitureEtape1() {
         return voitureEtape1;
     }
@@ -134,7 +134,7 @@ public class Devis {
         this.voitureEtape1 = voitureEtape1;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public VoitureEtape2 getVoitureEtape2() {
         return voitureEtape2;
     }
@@ -143,7 +143,7 @@ public class Devis {
         this.voitureEtape2 = voitureEtape2;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public VoitureEtape3 getVoitureEtape3() {
         return voitureEtape3;
     }
@@ -152,7 +152,7 @@ public class Devis {
         this.voitureEtape3 = voitureEtape3;
     }
 
-    @OneToOne(mappedBy = "devis")
+    @OneToOne(mappedBy = "devis",optional = true, cascade = CascadeType.MERGE)
     public VoitureEtape4 getVoitureEtape4() {
         return voitureEtape4;
     }

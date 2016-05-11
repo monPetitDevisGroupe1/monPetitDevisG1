@@ -83,7 +83,6 @@ public class CustomAuthProvider implements AuthenticationProvider {
         return authentication;
     }
 
-
     @Override
     public boolean supports(Class<?> authentication) {
         return true;

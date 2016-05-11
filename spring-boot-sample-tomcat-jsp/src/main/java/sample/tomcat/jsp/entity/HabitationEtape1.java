@@ -67,7 +67,7 @@ public class HabitationEtape1 {
         return result;
     }
 
-    @OneToOne
+    @OneToOne(optional = true, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_devis",
             nullable = false)
     public Devis getDevis() {
