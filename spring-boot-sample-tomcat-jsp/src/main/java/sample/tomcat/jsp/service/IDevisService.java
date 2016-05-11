@@ -13,9 +13,10 @@ import java.util.List;
 public interface IDevisService {
 
     Devis save(Devis user);
+    Devis findByIdDevis(int id);
     List<Devis> findByUser(User user);
     List<Devis> findByUserOrderByIdDevisDesc(User user);
     List<Devis> findByUserAndEtape(User user, int etape);
     void delete(Devis devis);
-    void deleteByIdDevis(int id);
+    void removeByIdDevis(Integer id);
 }

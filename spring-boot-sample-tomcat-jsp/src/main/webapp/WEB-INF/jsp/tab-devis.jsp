@@ -32,9 +32,13 @@
                             <td name="nom" value="${listValue.getNom()}">${listValue.getNom()}</td>
                             <td name="etape" value="${listValue.getEtape()}">${listValue.getEtape()}</td>
                             <td><button type="submit" value="delete">Supprimer</button></td>
-                            <td><a href=""> Reprise </a></td>
-                            <td><a href=""> Visualiser </a></td>
                         </form>
+                        <td>
+                            <form action="<c:url value='/private/visualisation'/>" method="GET">
+                                <button type="submit" name = "idDevis" value="${listValue.getIdDevis()}">Visualiser</button>
+                            </form>
+                        </td>
+                        <td><a href=""> Reprise </a></td>
 
                     </tr>
                 </c:forEach>
@@ -42,7 +46,7 @@
 
         </c:if>
 
-       <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
+       <a href = "<c:url value='/private/dashboard'/>">Retour au dashboard</a>
 
 
 

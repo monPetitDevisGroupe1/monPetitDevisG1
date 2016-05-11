@@ -12,9 +12,10 @@ import java.util.List;
 public interface DevisRepository extends CrudRepository<Devis,Integer> {
 
     Devis save(Devis devis);
+    Devis findByIdDevis(int id);
     List<Devis> findByUser(User user);
     List<Devis> findByUserOrderByIdDevisDesc(User user);
     List<Devis> findByUserAndEtape(User user, int etape);
     void delete(Devis devis);
-    void deleteByIdDevis(int id);
+
 }
