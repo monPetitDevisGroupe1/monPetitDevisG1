@@ -27,7 +27,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/voiture2").setViewName("voiture-form-2");
         registry.addViewController("/voiture3").setViewName("voiture-form-3");
         registry.addViewController("/savev1").setViewName("save-v1");
-        registry.addViewController("/private/tab-devis").setViewName("tab-devis");
     }
 
 }

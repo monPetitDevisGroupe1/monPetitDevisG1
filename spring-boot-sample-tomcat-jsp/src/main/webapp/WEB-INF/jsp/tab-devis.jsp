@@ -5,6 +5,7 @@
   Time: 16:30
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,13 +16,35 @@
     <h1>Tableau des devis</h1>
 
 
-    <form id="form" action="<c:url value='/private/tab-devis.update'/>" method="GET">
+        <c:if test="${not empty listeDevis}">
 
-        <p>test : ${tab-devis}</p>
+            <table>
+                <tr>
+                    <th>Nom</th>
+                    <th>Etape</th>
+                </tr>
+                <c:forEach var="listValue" items="${listeDevis}">
+                    <tr>
 
+
+                        <form action="<c:url value='/private/tab-devis.delete'/>" method="GET">
+                            <input style="display:none" type="text" name="idDevis" value="${listValue.getIdDevis()}" />
+                            <td name="nom" value="${listValue.getNom()}">${listValue.getNom()}</td>
+                            <td name="etape" value="${listValue.getEtape()}">${listValue.getEtape()}</td>
+                            <td><button type="submit" value="delete">Supprimer</button></td>
+                            <td><a href=""> Reprise </a></td>
+                            <td><a href=""> Visualiser </a></td>
+                        </form>
+
+                    </tr>
+                </c:forEach>
+            </table>
+
+        </c:if>
 
        <a href = "<c:url value='/private/dashboard'/>">Annuler</a>
-    </form>
+
+
 
 </body>
 </html>
