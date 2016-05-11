@@ -92,8 +92,9 @@ public class WizardControllerHabitation {
         devisService.save(session.getDevis());
         habitation4.save(modelWizard.getHabitationEtape4());
         // suppression de l'objet en session
+        ModelAndView modelHabitation = new ModelAndView("redirect:/provate/visualisation?idDevis="+session.getIdDevis()+"&validation=1");
         status.setComplete();
-        return new ModelAndView("successView");
+        return modelHabitation;
     }
 
     @RequestMapping(params = "_cancel")
