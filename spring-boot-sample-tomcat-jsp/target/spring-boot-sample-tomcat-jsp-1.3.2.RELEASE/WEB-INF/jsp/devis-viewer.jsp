@@ -5,6 +5,7 @@
   Time: 10:06
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,8 +18,8 @@
     <table>
     <c:forEach var="listValue" items="${listeValeurs}">
         <tr>
-            <th>${listeValue.get(0)} : </th>
-            <td>${listeValue.get(1)}</td>
+            <th>${listValue.get(0)} : </th>
+            <td>${listValue.get(1)}</td>
         </tr>
     </c:forEach>
     </table>

@@ -65,7 +65,7 @@ public class DevisController {
     }
     @RequestMapping(path = "/private/devis.delete")
     public ModelAndView devisSessionActionDelete() {
-        devisService.deleteByIdDevis(session.getIdDevis());
+        devisService.removeByIdDevis(session.getIdDevis());
         ModelAndView modelReturn = new ModelAndView("dashboard");
         return modelReturn;
     }

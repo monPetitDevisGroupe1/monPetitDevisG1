@@ -38,7 +38,7 @@
                                 <button type="submit" name = "idDevis" value="${listValue.getIdDevis()}">Visualiser</button>
                             </form>
                         </td>
-                        <td><a href=""> Reprise </a></td>
+                        <td><a href="/private/reprise.devis"> Reprise </a></td>
 
                     </tr>
                 </c:forEach>
