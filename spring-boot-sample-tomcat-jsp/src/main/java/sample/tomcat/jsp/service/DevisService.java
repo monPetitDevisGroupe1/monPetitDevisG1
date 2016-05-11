@@ -27,6 +27,11 @@ public class DevisService implements IDevisService {
     }
 
     @Override
+    public Devis findByIdDevis(int id){
+        return devisRepository.findByIdDevis(id);
+    }
+
+    @Override
     public List<Devis> findByUser(User user){
         return devisRepository.findByUser(user);
     }
@@ -46,8 +51,8 @@ public class DevisService implements IDevisService {
         devisRepository.delete(devis);
     }
     @Override
-    public void deleteByIdDevis(int id){
-        devisRepository.deleteByIdDevis(id);
+    public void removeByIdDevis(Integer id){
+        devisRepository.delete(id);
     }
 
 }

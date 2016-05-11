@@ -64,10 +64,12 @@ public class TabDevisController {
         User user = userService.findById(applicationData.getId());
         String idDevis = request.getParameter("idDevis");
 
-        
         System.out.println("entre dans le delete" + idDevis);
-        devisService.deleteByIdDevis(Integer.parseInt(idDevis));
-        ModelAndView modelReturn = new ModelAndView("tab-devis");
+        devisService.removeByIdDevis(Integer.parseInt(idDevis));
+
+
+
+        ModelAndView modelReturn = new ModelAndView("redirect:/private/tab-devis");
 
         return modelReturn;
 

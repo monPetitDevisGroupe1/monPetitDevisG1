@@ -19,7 +19,7 @@
 </h2>
 
 <form action="<c:url value='/private/devis'/>" method="GET">
-    <button type="submit" value="voiture">Nouveau Devis</button>
+    <button type="submit">Nouveau Devis</button>
 </form>
 
 
