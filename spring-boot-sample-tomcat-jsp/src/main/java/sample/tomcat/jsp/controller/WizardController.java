@@ -31,6 +31,9 @@ public class WizardController {
     IVoitureEtape2Service voiture2;
 
     @Autowired
+    IDevisService devisService;
+
+    @Autowired
     IVoitureEtape3Service voiture3;
 
     @Autowired
@@ -40,10 +43,11 @@ public class WizardController {
 
     @RequestMapping
     public ModelAndView processWizard() {
-        
         ModelAndView modelHabitation = new ModelAndView("voiture-form-1","modelWizard", new DevisVoiture());
         User user = userCourant.findById(session.getId());
         modelHabitation.addObject("user", user);
+        modelHabitation.addObject("id_devis", session.getIdDevis());
+        modelHabitation.addObject("nom_devis", session.getNomDevis());
         return modelHabitation;
     }
 
@@ -56,16 +60,27 @@ public class WizardController {
 
         switch(currentPage) {
             case 2:
+                session.getDevis().setEtape(1);
+                modelWizard.getVoitureEtape1().setDevis(session.getDevis());
+                devisService.save(session.getDevis());
                 voiture1.save(modelWizard.getVoitureEtape1());
                 break;
             case 3:
+                session.getDevis().setEtape(2);
+                modelWizard.getVoitureEtape2().setDevis(session.getDevis());
+                devisService.save(session.getDevis());
                 voiture2.save(modelWizard.getVoitureEtape2());
                 break;
             case 4:
+                session.getDevis().setEtape(3);
+                modelWizard.getVoitureEtape3().setDevis(session.getDevis());
+                devisService.save(session.getDevis());
                 voiture3.save(modelWizard.getVoitureEtape3());
                 break;
         }
         ModelAndView modelHabitation = new ModelAndView(pageViews[currentPage-1],"modelWizard",modelWizard);
+        modelHabitation.addObject("id_devis", session.getIdDevis());
+        modelHabitation.addObject("nom_devis", session.getNomDevis());
         modelHabitation.addObject("user", user);
         return modelHabitation;
     }
@@ -74,6 +89,9 @@ public class WizardController {
      */
     @RequestMapping(params = "_finish")
     public ModelAndView processFinish(@ModelAttribute("modelWizard") DevisVoiture modelWizard, SessionStatus status) {
+        session.getDevis().setEtape(4);
+        modelWizard.getVoitureEtape4().setDevis(session.getDevis());
+
         voiture4.save(modelWizard.getVoitureEtape4());
         // suppression de l'objet en session
         status.setComplete();

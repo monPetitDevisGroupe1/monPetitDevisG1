@@ -17,6 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<h1>Nom Devis : ${nom_devis}</h1>
 <h1> Nom : ${user.nom}</h1>
 <h1>Prenom : ${user.prenom}</h1>
     <form:form action="/wizard.habitation?_page=3" method="POST" modelAttribute="modelWizard.habitationEtape2">
@@ -31,6 +32,8 @@
         <form:input path="garage" /> <BR>
     <input type="submit" value="Valider et passer a l'etape 3" />
     </form:form>
+<a href="/private/dashboard"> Retourner au dashboard en gardant le devis </a><br><br>
+<a href="/private/devis.delete"> Annuler et supprimer le devis </a><br><br>
     <a href="/wizard.habitation?_page2">Precedent</a>
 </body>
 </html>

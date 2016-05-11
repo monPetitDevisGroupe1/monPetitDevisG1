@@ -29,6 +29,9 @@ public class DevisController {
     private IUserService userService;
 
     @Autowired
+    ApplicationData session;
+
+    @Autowired
     private IDevisService devisService;
 
     @Autowired
@@ -44,7 +47,7 @@ public class DevisController {
         Devis devis = new Devis();
         devis.setNom(nom);
         devis.setTypeDevis(typeDevis);
-        devis.setEtape(1);
+        devis.setEtape(0);
         devis.setUser(user);
         devisService.save(devis);
         String url;
@@ -57,9 +60,15 @@ public class DevisController {
 
         applicationData.setIdDevis(devis.getIdDevis());
         applicationData.setNomDevis(nom);
+        applicationData.setDevis(devis);
         return model;
     }
-
+    @RequestMapping(path = "/private/devis.delete")
+    public ModelAndView devisSessionActionDelete() {
+        devisService.deleteByIdDevis(session.getIdDevis());
+        ModelAndView modelReturn = new ModelAndView("dashboard");
+        return modelReturn;
+    }
     @RequestMapping(path = "/private/devis/save", method = RequestMethod.POST)
     public void devisActionSave(@ModelAttribute Devis devis){
        ModelAndView model = new ModelAndView("userAfterSave");
