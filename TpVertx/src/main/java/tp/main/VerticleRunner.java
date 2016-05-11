@@ -4,10 +4,7 @@ package tp.main;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpHeaders;
-import io.vertx.core.http.HttpMethod;
-import io.vertx.core.http.HttpServer;
-import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.http.*;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
@@ -216,6 +213,24 @@ public class VerticleRunner {
 //  / requete recuperer pseudo uniquement
         Route route3 = router.route(HttpMethod.POST, "/profil");
         route3.handler(routingContext3 -> {
+            String apiToken = "";
+            String authorization = routingContext3.request().headers().get(HttpHeaders.AUTHORIZATION);
+            if (authorization != null) {
+                String[] parts = authorization.split(" ");
+                String sscheme = parts[0];
+                if (!"token".equals(sscheme)) {
+                    routingContext3.fail(400);
+                    return;
+                }
+                if (parts.length < 2) {
+                    routingContext3.fail(400);
+                    return;
+                }
+                apiToken = parts[1];
+            } else {
+                routingContext3.fail(400);
+            }
+
             Boolean mode = routingContext3.getBodyAsJson().getBoolean("update");
             System.out.println("Mode : " + mode);
             Integer id = 0;
